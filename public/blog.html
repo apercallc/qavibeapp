@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QAVibe Blog - Latest Testing Insights</title>
+    <meta name="description" content="Read the latest insights, tips, and updates from the testing world on QAVibe Blog.">
+    
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="../src/css/styles.css">
+    <link rel="stylesheet" href="../src/css/blog-styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <!-- Configuration and Scripts -->
+    <script src="../scripts/config.js" defer></script>
+    <script src="../src/js/blog.js" defer></script>
+</head>
+<body>
+    <!-- Navigation (same as main site) -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <a href="./index.html" style="text-decoration: none; color: inherit;">
+                    <h2>QAVibe</h2>
+                </a>
+            </div>
+            <div class="nav-menu" id="nav-menu">
+                <a href="./index.html" class="nav-link">Home</a>
+                <div class="nav-dropdown">
+                    <a href="/#products" class="nav-link dropdown-trigger">
+                        Products
+                        <i class="fas fa-chevron-down dropdown-icon"></i>
+                    </a>
+                    <div class="dropdown-content">
+                        <div class="dropdown-item" tabindex="0" onclick="window.location.href='https://testflux.qavibeapp.com'">
+                            <div class="dropdown-item-icon">
+                                <i class="fas fa-tachometer-alt"></i>
+                            </div>
+                            <div class="dropdown-item-content">
+                                <h4>TestFlux</h4>
+                                <p>Test Results Dashboard</p>
+                            </div>
+                            <div class="dropdown-item-action">
+                                <i class="fas fa-external-link-alt"></i>
+                            </div>
+                        </div>
+                        <div class="dropdown-item" tabindex="0" onclick="window.location.href='https://stackhealth.qavibeapp.com'">
+                            <div class="dropdown-item-icon">
+                                <i class="fas fa-chart-bar"></i>
+                            </div>
+                            <div class="dropdown-item-content">
+                                <h4>StackHealth</h4>
+                                <p>Scorecard Platform</p>
+                            </div>
+                            <div class="dropdown-item-action">
+                                <i class="fas fa-external-link-alt"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <a href="/#support" class="nav-link">Support</a>
+                <a href="./blog.html" class="nav-link active">Blog</a>
+            </div>
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Blog Header -->
+    <section class="blog-header">
+        <div class="container">
+            <div class="blog-header-content">
+                <h1>QAVibe Blog</h1>
+                <p>Latest insights, tips, and updates from the testing world</p>
+                <div class="blog-admin-controls" id="adminControls" style="display: none;">
+                    <button class="btn btn-primary" onclick="showNewPostModal()">
+                        <i class="fas fa-plus"></i> New Post
+                    </button>
+                    <button class="btn btn-secondary" onclick="toggleAdminMode()">
+                        <i class="fas fa-cog"></i> Admin Mode
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Blog Filters -->
+    <section class="blog-filters">
+        <div class="container">
+            <div class="filter-bar">
+                <div class="search-box">
+                    <input type="text" id="searchInput" placeholder="Search posts..." onkeyup="filterPosts()">
+                    <i class="fas fa-search"></i>
+                </div>
+                <div class="filter-tags">
+                    <button class="filter-tag active" onclick="filterByTag('all')">All</button>
+                    <button class="filter-tag" onclick="filterByTag('automation')">Automation</button>
+                    <button class="filter-tag" onclick="filterByTag('testing')">Testing</button>
+                    <button class="filter-tag" onclick="filterByTag('tools')">Tools</button>
+                    <button class="filter-tag" onclick="filterByTag('tutorials')">Tutorials</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Blog Posts -->
+    <section class="blog-posts">
+        <div class="container">
+            <div class="posts-grid" id="postsGrid">
+                <!-- Sample posts will be loaded here by JavaScript -->
+            </div>
+            
+            <!-- Empty state -->
+            <div class="empty-state" id="emptyState" style="display: none;">
+                <i class="fas fa-file-alt"></i>
+                <h3>No posts found</h3>
+                <p>There are no blog posts matching your criteria.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- New Post Modal -->
+    <div id="newPostModal" class="modal" style="display: none;">
+        <div class="modal-content blog-modal">
+            <div class="modal-header">
+                <h3>Create New Blog Post</h3>
+                <button class="modal-close" onclick="closeNewPostModal()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <form id="newPostForm" onsubmit="createPost(event)">
+                <div class="form-group">
+                    <label for="postTitle">Title *</label>
+                    <input type="text" id="postTitle" required maxlength="200">
+                </div>
+                
+                <div class="form-group">
+                    <label for="postDescription">Description *</label>
+                    <textarea id="postDescription" rows="4" required maxlength="500" placeholder="Brief description that appears in the post preview. Add image using: ![Alt Text](image_url)"></textarea>
+                    <small>To add an image, use markdown format: ![Alt Text](your_image_url)</small>
+                </div>
+                
+                <div class="form-group">
+                    <label for="postContent">Content *</label>
+                    <textarea id="postContent" rows="12" required placeholder="Write your blog post content here (supports Markdown)..."></textarea>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="postTags">Tags</label>
+                        <input type="text" id="postTags" placeholder="automation, testing, tools (comma separated)">
+                        <small>Separate tags with commas</small>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="postLabels">Labels</label>
+                        <select id="postLabels" multiple>
+                            <option value="featured">Featured</option>
+                            <option value="tutorial">Tutorial</option>
+                            <option value="announcement">Announcement</option>
+                            <option value="guide">Guide</option>
+                            <option value="news">News</option>
+                        </select>
+                        <small>Hold Ctrl/Cmd to select multiple</small>
+                    </div>
+                </div>
+                
+                <div class="form-actions">
+                    <button type="button" class="btn btn-secondary" onclick="closeNewPostModal()">Cancel</button>
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-save"></i> Publish Post
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Admin Login Modal -->
+    <div id="adminLoginModal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Admin Login</h3>
+                <button class="modal-close" onclick="closeAdminLogin()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <form id="adminLoginForm" onsubmit="adminLogin(event)">
+                <div class="form-group">
+                    <label for="adminPassword">Admin Password</label>
+                    <input type="password" id="adminPassword" required>
+                </div>
+                <div class="form-actions">
+                    <button type="button" class="btn btn-secondary" onclick="closeAdminLogin()">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Login</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Footer (simplified) -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>QAVibe</h4>
+                    <p>Free enterprise testing tools</p>
+                </div>
+                <div class="footer-section">
+                    <h5>Quick Links</h5>
+                    <a href="./index.html">Home</a>
+                    <a href="/#products">Products</a>
+                    <a href="./blog.html">Blog</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 QAVibe. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Admin Access Button (hidden by default) -->
+    <div class="admin-access" onclick="showAdminLogin()" title="Admin Access">
+        <i class="fas fa-key"></i>
+    </div>
+</body>
+</html>

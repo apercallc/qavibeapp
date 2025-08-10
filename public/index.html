@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QAVibe - Free Enterprise Testing Tools</title>
+    <meta name="description" content="Free enterprise-grade testing tools including TestFlux dashboard and StackHealth scorecard platform. Transform your software quality process at zero cost.">
+    <meta name="keywords" content="testing tools, automation, quality assurance, TestFlux, StackHealth, free enterprise tools, CI/CD, Playwright, k6, ZAP">
+    <meta name="author" content="QAVibe">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://qavibeapp.com/">
+    <meta property="og:title" content="QAVibe - Free Enterprise Testing Tools">
+    <meta property="og:description" content="Free enterprise-grade testing tools including TestFlux dashboard and StackHealth scorecard platform. Transform your software quality process at zero cost.">
+    <meta property="og:image" content="https://qavibeapp.com/og-image.png">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://qavibeapp.com/">
+    <meta property="twitter:title" content="QAVibe - Free Enterprise Testing Tools">
+    <meta property="twitter:description" content="Free enterprise-grade testing tools including TestFlux dashboard and StackHealth scorecard platform. Transform your software quality process at zero cost.">
+    <meta property="twitter:image" content="https://qavibeapp.com/og-image.png">
+
+    <!-- PWA -->
+    <link rel="manifest" href="/manifest.json">
+    <meta name="theme-color" content="#2563eb">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="QAVibe">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="apple-touch-icon" href="/icon-192.png">
+    
+    <!-- Configuration meta tags (populated by server or build process) -->
+    <meta name="config:announcement_enabled" content="true">
+    <meta name="config:announcement_message" content="🎉 New Feature: StackHealth now includes automated security scanning! Learn more →">
+    <meta name="config:announcement_link" content="#products">
+    <meta name="config:testflux_url" content="https://testflux.qavibeapp.com">
+    <meta name="config:stackhealth_url" content="https://stackhealth.qavibeapp.com">
+    
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="../src/css/styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <!-- Configuration and Scripts -->
+    <script src="../scripts/config.js" defer></script>
+</head>
+<body>
+    <!-- Announcement Banner -->
+    <div id="announcementBanner" class="announcement-banner" style="display: none;">
+        <div class="announcement-content">
+            <div class="announcement-text">
+                <i class="fas fa-bullhorn"></i>
+                <span id="announcementMessage"></span>
+            </div>
+            <button class="announcement-close" onclick="closeAnnouncement()">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <h2>QAVibe</h2>
+            </div>
+            <div class="nav-menu" id="nav-menu">
+                <a href="#home" class="nav-link">Home</a>
+                <div class="nav-dropdown">
+                    <a href="#products" class="nav-link dropdown-trigger">
+                        Products
+                        <i class="fas fa-chevron-down dropdown-icon"></i>
+                    </a>
+                    <div class="dropdown-content">
+                        <div class="dropdown-item" tabindex="0" onclick="window.QAVibeApp ? window.QAVibeApp.launchProduct('testflux') : launchProduct('testflux')">
+                            <div class="dropdown-item-icon">
+                                <i class="fas fa-tachometer-alt"></i>
+                            </div>
+                            <div class="dropdown-item-content">
+                                <h4>TestFlux</h4>
+                                <p>Test Results Dashboard</p>
+                            </div>
+                            <div class="dropdown-item-action">
+                                <i class="fas fa-external-link-alt"></i>
+                            </div>
+                        </div>
+                        <div class="dropdown-item" tabindex="0" onclick="window.QAVibeApp ? window.QAVibeApp.launchProduct('stackhealth') : launchProduct('stackhealth')">
+                            <div class="dropdown-item-icon">
+                                <i class="fas fa-chart-bar"></i>
+                            </div>
+                            <div class="dropdown-item-content">
+                                <h4>StackHealth</h4>
+                                <p>Scorecard Platform</p>
+                            </div>
+                            <div class="dropdown-item-action">
+                                <i class="fas fa-external-link-alt"></i>
+                            </div>
+                        </div>
+                        <div class="dropdown-divider"></div>
+                        <div class="dropdown-item" tabindex="0" onclick="window.QAVibeApp ? window.QAVibeApp.scrollToProducts() : scrollToProducts()">>
+                            <div class="dropdown-item-icon">
+                                <i class="fas fa-info-circle"></i>
+                            </div>
+                            <div class="dropdown-item-content">
+                                <h4>Learn More</h4>
+                                <p>View detailed information</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <a href="#support" class="nav-link">Support</a>
+                <a href="./blog.html" class="nav-link">Blog</a>
+                <button class="demo-btn">Get a Demo</button>
+            </div>
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-container">
+            <div class="hero-content">
+                <h1>Enterprise Testing Tools<br><span class="highlight">Completely Free</span></h1>
+                <p class="hero-description">
+                    Transform your software quality process with professional-grade testing platforms. 
+                    No hidden costs, no limitations, no enterprise fees.
+                </p>
+                <div class="hero-stats">
+                    <div class="stat">
+                        <h3>100%</h3>
+                        <p>Free Forever</p>
+                    </div>
+                    <div class="stat">
+                        <h3>50+</h3>
+                        <p>Companies Using</p>
+                    </div>
+                    <div class="stat">
+                        <h3>95%</h3>
+                        <p>Test Coverage Improvement</p>
+                    </div>
+                </div>
+                <div class="hero-actions">
+                    <button class="btn-primary" onclick="openDemoModal()">
+                        <i class="fas fa-play"></i>
+                        Get a Demo
+                    </button>
+                    <button class="btn-secondary" onclick="scrollToProducts()">
+                        <i class="fas fa-arrow-down"></i>
+                        Explore Tools
+                    </button>
+                </div>
+            </div>
+            <div class="hero-visual">
+                <div class="dashboard-preview">
+                    <div class="dashboard-header">
+                        <div class="dashboard-tabs">
+                            <span class="tab active">TestFlux</span>
+                            <span class="tab">StackHealth</span>
+                        </div>
+                    </div>
+                    <div class="dashboard-content">
+                        <div class="metric-cards">
+                            <div class="metric-card">
+                                <h4>Test Success Rate</h4>
+                                <div class="metric-value">94.2%</div>
+                            </div>
+                            <div class="metric-card">
+                                <h4>Coverage</h4>
+                                <div class="metric-value">87.5%</div>
+                            </div>
+                            <div class="metric-card">
+                                <h4>Performance</h4>
+                                <div class="metric-value">1.2s</div>
+                            </div>
+                        </div>
+                        <div class="chart-placeholder">
+                            <div class="chart-bars">
+                                <div class="bar" style="height: 60%"></div>
+                                <div class="bar" style="height: 85%"></div>
+                                <div class="bar" style="height: 72%"></div>
+                                <div class="bar" style="height: 94%"></div>
+                                <div class="bar" style="height: 88%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Benefits Section -->
+    <section class="benefits">
+        <div class="container">
+            <h2>Why Choose QAVibe?</h2>
+            <div class="benefits-grid">
+                <div class="benefit-card">
+                    <div class="benefit-icon">
+                        <i class="fas fa-gift"></i>
+                    </div>
+                    <h3>100% Free</h3>
+                    <p>No hidden costs, no subscription fees, no enterprise licensing. Professional tools that cost $0.</p>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3>Enterprise Grade</h3>
+                    <p>Bank-level security, role-based access, and compliance features you'd expect from premium tools.</p>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-icon">
+                        <i class="fas fa-rocket"></i>
+                    </div>
+                    <h3>Easy Integration</h3>
+                    <p>Seamless CI/CD integration with Playwright, ZAP, k6, and all major testing frameworks.</p>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3>Smart Analytics</h3>
+                    <p>ML-powered trend analysis, intelligent alerts, and real-time insights that drive decisions.</p>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h3>Team Collaboration</h3>
+                    <p>Role-based access, team dashboards, and collaborative features for modern development teams.</p>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-icon">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <h3>5-Minute Setup</h3>
+                    <p>Get started in minutes, not weeks. Simple configuration with powerful results.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Companies Using Section -->
+    <section class="companies">
+        <div class="container">
+            <h2>Trusted by Growing Companies</h2>
+            <p class="companies-subtitle">Join 50+ companies improving their software quality with QAVibe</p>
+            <div class="companies-grid">
+                <div class="company-logo">TechCorp</div>
+                <div class="company-logo">DevStudio</div>
+                <div class="company-logo">CloudSoft</div>
+                <div class="company-logo">DataFlow</div>
+                <div class="company-logo">WebScale</div>
+                <div class="company-logo">AppNext</div>
+            </div>
+            <div class="impact-metrics">
+                <div class="impact-card">
+                    <h3>40%</h3>
+                    <p>Faster Bug Detection</p>
+                </div>
+                <div class="impact-card">
+                    <h3>60%</h3>
+                    <p>Reduced Testing Time</p>
+                </div>
+                <div class="impact-card">
+                    <h3>85%</h3>
+                    <p>Team Satisfaction</p>
+                </div>
+                <div class="impact-card">
+                    <h3>$0</h3>
+                    <p>Total Cost</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Products Section -->
+    <section id="products" class="products">
+        <div class="container">
+            <h2>Our Products</h2>
+            <div class="products-grid">
+                <div class="product-card">
+                    <div class="product-header">
+                        <div class="product-icon">
+                            <i class="fas fa-tachometer-alt"></i>
+                        </div>
+                        <h3>TestFlux</h3>
+                        <p class="product-tagline">Test Results Dashboard</p>
+                    </div>
+                    <div class="product-description">
+                        <p>Enterprise-grade platform for aggregating, storing, and visualizing automated test results from Playwright, ZAP, and k6.</p>
+                        <ul class="feature-list">
+                            <li><i class="fas fa-check"></i>CI/CD Integration</li>
+                            <li><i class="fas fa-check"></i>Role-based Access Control</li>
+                            <li><i class="fas fa-check"></i>Intelligent Alerts</li>
+                            <li><i class="fas fa-check"></i>ML-powered Trend Analysis</li>
+                            <li><i class="fas fa-check"></i>Real-time Analytics</li>
+                            <li><i class="fas fa-check"></i>Enterprise Security</li>
+                        </ul>
+                    </div>
+                    <div class="product-actions">
+                        <button class="btn-product-primary" onclick="window.open('https://testflux.qavibeapp.com', '_blank')">
+                            Launch TestFlux
+                        </button>
+                        <button class="btn-product-secondary" onclick="openDemoModal('testflux')">
+                            View Demo
+                        </button>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-header">
+                        <div class="product-icon">
+                            <i class="fas fa-chart-bar"></i>
+                        </div>
+                        <h3>StackHealth</h3>
+                        <p class="product-tagline">Scorecard Platform</p>
+                    </div>
+                    <div class="product-description">
+                        <p>Enterprise software quality assessment tool with comprehensive scorecards, analytics, PDF reports, and product management capabilities.</p>
+                        <ul class="feature-list">
+                            <li><i class="fas fa-check"></i>Security Assessment</li>
+                            <li><i class="fas fa-check"></i>Automation Analytics</li>
+                            <li><i class="fas fa-check"></i>Performance Testing</li>
+                            <li><i class="fas fa-check"></i>CI/CD Maturity Scoring</li>
+                            <li><i class="fas fa-check"></i>PDF Report Generation</li>
+                            <li><i class="fas fa-check"></i>Product Management</li>
+                        </ul>
+                    </div>
+                    <div class="product-actions">
+                        <button class="btn-product-primary" onclick="window.open('https://stackhealth.qavibeapp.com', '_blank')">
+                            Launch StackHealth
+                        </button>
+                        <button class="btn-product-secondary" onclick="openDemoModal('stackhealth')">
+                            View Demo
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Support Section -->
+    <section id="support" class="support">
+        <div class="container">
+            <h2>Support & Resources</h2>
+            <div class="support-grid">
+                <div class="support-card">
+                    <div class="support-icon">
+                        <i class="fas fa-book"></i>
+                    </div>
+                    <h3>Documentation</h3>
+                    <p>Comprehensive guides and API documentation for all tools</p>
+                    <a href="#" class="support-link">View Docs <i class="fas fa-arrow-right"></i></a>
+                </div>
+                <div class="support-card">
+                    <div class="support-icon">
+                        <i class="fas fa-video"></i>
+                    </div>
+                    <h3>Video Tutorials</h3>
+                    <p>Step-by-step video guides for setup and advanced features</p>
+                    <a href="#" class="support-link">Watch Videos <i class="fas fa-arrow-right"></i></a>
+                </div>
+                <div class="support-card">
+                    <div class="support-icon">
+                        <i class="fas fa-blog"></i>
+                    </div>
+                    <h3>QAVibe Blog</h3>
+                    <p>Latest insights, tips, and updates from the testing world</p>
+                    <a href="./blog.html" class="support-link">Read Blog <i class="fas fa-arrow-right"></i></a>
+                </div>
+                <div class="support-card">
+                    <div class="support-icon">
+                        <i class="fas fa-headset"></i>
+                    </div>
+                    <h3>Direct Support</h3>
+                    <p>Contact our team for technical support and guidance</p>
+                    <a href="#" class="support-link">Get Support <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>QAVibe</h3>
+                    <p>Free enterprise testing tools for modern development teams.</p>
+                    <div class="social-links">
+                        <a href="https://thoangdev.github.io/" target="_blank" class="social-link">
+                            <i class="fab fa-github"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h4>Legal</h4>
+                    <ul>
+                        <li><a href="#privacy">Privacy Policy</a></li>
+                        <li><a href="#terms">Terms of Service</a></li>
+                        <li><a href="#acceptable-use">Acceptable Use</a></li>
+                        <li><a href="#legal-center">Legal Center</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Company</h4>
+                    <ul>
+                        <li><a href="#about">About Us</a></li>
+                        <li><a href="#changelog">Changelog</a></li>
+                        <li><a href="#security">Security & Compliance</a></li>
+                        <li><a href="#integrations">Integrations</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Support the Project</h4>
+                    <p>Help us keep these tools free for everyone.</p>
+                    <button class="donate-btn" onclick="openDonationModal()">
+                        <i class="fas fa-heart"></i>
+                        Donate
+                    </button>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 QAVibe. All rights reserved. Made with ❤️ by <a href="https://thoangdev.github.io/" target="_blank">thoangdev</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Demo Modal -->
+    <div id="demoModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeDemoModal()">&times;</span>
+            <h2>Get a Demo</h2>
+            <form id="demoForm">
+                <div class="form-group">
+                    <label for="name">Name *</label>
+                    <input type="text" id="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email *</label>
+                    <input type="email" id="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="company">Company</label>
+                    <input type="text" id="company">
+                </div>
+                <div class="form-group">
+                    <label for="product">Product Interest</label>
+                    <select id="product">
+                        <option value="both">Both Products</option>
+                        <option value="testflux">TestFlux Dashboard</option>
+                        <option value="stackhealth">StackHealth Scorecard</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="message">Message</label>
+                    <textarea id="message" rows="4" placeholder="Tell us about your testing needs..."></textarea>
+                </div>
+                <button type="submit" class="btn-primary">Schedule Demo</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Donation Modal -->
+    <div id="donationModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeDonationModal()">&times;</span>
+            <h2>Support QAVibe</h2>
+            <p>Your support helps us keep these enterprise tools free for everyone.</p>
+            <div class="donation-options">
+                <button class="donation-btn" onclick="donate(5)">$5</button>
+                <button class="donation-btn" onclick="donate(10)">$10</button>
+                <button class="donation-btn" onclick="donate(25)">$25</button>
+                <button class="donation-btn" onclick="donate(50)">$50</button>
+            </div>
+            <p class="donation-note">Or choose your own amount through our secure payment partner.</p>
+        </div>
+    </div>
+
+    <script src="../src/js/script.js"></script>
+</body>
+</html>

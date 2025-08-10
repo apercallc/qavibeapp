@@ -1,0 +1,68 @@
+{
+  "name": "qavibeapp",
+  "version": "1.0.0",
+  "description": "QAVibe - Free Enterprise Testing Tools - Central landing page for TestFlux and StackHealth platforms",
+  "main": "public/index.html",
+  "scripts": {
+    "build": "node scripts/build.js",
+    "dev": "npm run serve",
+    "serve": "cd public && python3 -m http.server 8002",
+    "serve-node": "npx http-server public -p 8002 -o",
+    "build:prod": "NODE_ENV=production node scripts/build.js",
+    "preview": "npm run build && cd dist && python3 -m http.server 8002",
+    "deploy:netlify": "netlify deploy --prod --dir=public",
+    "deploy:vercel": "vercel --prod public",
+    "lighthouse": "lighthouse http://localhost:8002 --output html --output-path ./lighthouse-report.html",
+    "validate": "html-validate public/index.html",
+    "optimize": "npm run build:prod && npm run lighthouse",
+    "blog:start": "node server/blog-server-db.js",
+    "blog:dev": "nodemon server/blog-server-db.js",
+    "start": "node server/blog-server-db.js",
+    "start:frontend": "npm run serve",
+    "start:backend": "npm run blog:start"
+  },
+  "keywords": [
+    "testing",
+    "automation",
+    "quality-assurance",
+    "dashboard",
+    "free-tools",
+    "enterprise",
+    "playwright",
+    "k6",
+    "zap",
+    "ci-cd"
+  ],
+  "author": "QAVibe Team",
+  "license": "MIT",
+  "homepage": "https://qavibeapp.com",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/apercallc/qavibeapp.git"
+  },
+  "bugs": {
+    "url": "https://github.com/apercallc/qavibeapp/issues"
+  },
+  "devDependencies": {
+    "html-validate": "^8.0.0",
+    "http-server": "^14.1.1",
+    "lighthouse": "^11.0.0",
+    "nodemon": "^3.0.1"
+  },
+  "dependencies": {
+    "body-parser": "^1.20.3",
+    "cors": "^2.8.5",
+    "express": "^4.21.2",
+    "multer": "^1.4.5-lts.1",
+    "sqlite3": "^5.1.7"
+  },
+  "engines": {
+    "node": ">=14.0.0"
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not dead",
+    "not ie 11"
+  ]
+}

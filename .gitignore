@@ -1,0 +1,67 @@
+# Dependencies
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Environment variables
+.env
+.env.local
+.env.development
+.env.production
+
+# Database files (keep blog.db for development, but not any journals/wal)
+*.db-journal
+*.db-wal
+
+# Build outputs
+dist/
+build/
+public/dist/
+
+# Logs
+logs/
+*.log
+
+# Runtime data
+pids/
+*.pid
+*.seed
+*.pid.lock
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Temporary files
+*.tmp
+*.temp
+.cache/
+
+# Coverage reports
+coverage/
+.nyc_output/
+
+# Backup files
+*.bak
+*.backup
+
+# Lighthouse reports
+lighthouse-report.html
+
+# Development files
+.env.development.local
+.env.test.local
+.env.production.local

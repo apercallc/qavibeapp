@@ -1,0 +1,16 @@
+services:
+  - type: web
+    name: qavibe-blog
+    runtime: node
+    plan: starter
+    buildCommand: npm install
+    startCommand: node server/blog-server-db.js
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 3001
+    disk:
+      name: blog-data
+      mountPath: /opt/render/project/src
+      sizeGB: 1
