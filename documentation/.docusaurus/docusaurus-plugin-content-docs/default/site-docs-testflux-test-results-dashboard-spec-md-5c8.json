@@ -1,0 +1,23 @@
+{
+  "id": "testflux/test-results-dashboard-spec",
+  "title": "Test Results Dashboard - Specification Document",
+  "description": "Overview",
+  "source": "@site/docs/testflux/test-results-dashboard-spec.md",
+  "sourceDirName": "testflux",
+  "slug": "/testflux/test-results-dashboard-spec",
+  "permalink": "/docs/testflux/test-results-dashboard-spec",
+  "draft": false,
+  "unlisted": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "testfluxSidebar",
+  "previous": {
+    "title": "Deployment Guide",
+    "permalink": "/docs/testflux/deployment"
+  },
+  "next": {
+    "title": "Monitoring & Observability Guide",
+    "permalink": "/docs/testflux/monitoring"
+  }
+}

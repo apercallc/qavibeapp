@@ -1,0 +1,124 @@
+{
+  "docusaurus-plugin-content-docs": {
+    "default": {
+      "path": "/docs/",
+      "versions": [
+        {
+          "name": "current",
+          "label": "Next",
+          "isLast": true,
+          "path": "/docs/",
+          "mainDocId": "testflux/intro",
+          "docs": [
+            {
+              "id": "stackhealth/contributing",
+              "path": "/docs/stackhealth/contributing",
+              "sidebar": "stackhealthSidebar"
+            },
+            {
+              "id": "stackhealth/development",
+              "path": "/docs/stackhealth/development",
+              "sidebar": "stackhealthSidebar"
+            },
+            {
+              "id": "stackhealth/frontend-troubleshooting",
+              "path": "/docs/stackhealth/frontend-troubleshooting",
+              "sidebar": "stackhealthSidebar"
+            },
+            {
+              "id": "stackhealth/intro",
+              "path": "/docs/stackhealth/intro",
+              "sidebar": "stackhealthSidebar"
+            },
+            {
+              "id": "stackhealth/organization-summary",
+              "path": "/docs/stackhealth/organization-summary",
+              "sidebar": "stackhealthSidebar"
+            },
+            {
+              "id": "stackhealth/project-overview",
+              "path": "/docs/stackhealth/project-overview",
+              "sidebar": "stackhealthSidebar"
+            },
+            {
+              "id": "stackhealth/readme",
+              "path": "/docs/stackhealth/",
+              "sidebar": "stackhealthSidebar"
+            },
+            {
+              "id": "stackhealth/security",
+              "path": "/docs/stackhealth/security",
+              "sidebar": "stackhealthSidebar"
+            },
+            {
+              "id": "stackhealth/user-guide",
+              "path": "/docs/stackhealth/user-guide",
+              "sidebar": "stackhealthSidebar"
+            },
+            {
+              "id": "stackhealth/v2-features",
+              "path": "/docs/stackhealth/v2-features",
+              "sidebar": "stackhealthSidebar"
+            },
+            {
+              "id": "stackhealth/vscode-setup",
+              "path": "/docs/stackhealth/vscode-setup",
+              "sidebar": "stackhealthSidebar"
+            },
+            {
+              "id": "testflux/architecture",
+              "path": "/docs/testflux/architecture",
+              "sidebar": "testfluxSidebar"
+            },
+            {
+              "id": "testflux/deployment",
+              "path": "/docs/testflux/deployment",
+              "sidebar": "testfluxSidebar"
+            },
+            {
+              "id": "testflux/enterprise-tools",
+              "path": "/docs/testflux/enterprise-tools",
+              "sidebar": "testfluxSidebar"
+            },
+            {
+              "id": "testflux/intro",
+              "path": "/docs/testflux/intro",
+              "sidebar": "testfluxSidebar"
+            },
+            {
+              "id": "testflux/monitoring",
+              "path": "/docs/testflux/monitoring",
+              "sidebar": "testfluxSidebar"
+            },
+            {
+              "id": "testflux/setup-complete",
+              "path": "/docs/testflux/setup-complete",
+              "sidebar": "testfluxSidebar"
+            },
+            {
+              "id": "testflux/test-results-dashboard-spec",
+              "path": "/docs/testflux/test-results-dashboard-spec",
+              "sidebar": "testfluxSidebar"
+            }
+          ],
+          "draftIds": [],
+          "sidebars": {
+            "testfluxSidebar": {
+              "link": {
+                "path": "/docs/testflux/intro",
+                "label": "Introduction"
+              }
+            },
+            "stackhealthSidebar": {
+              "link": {
+                "path": "/docs/stackhealth/intro",
+                "label": "Introduction"
+              }
+            }
+          }
+        }
+      ],
+      "breadcrumbs": true
+    }
+  }
+}

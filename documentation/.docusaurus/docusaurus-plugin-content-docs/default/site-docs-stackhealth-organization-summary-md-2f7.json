@@ -1,0 +1,23 @@
+{
+  "id": "stackhealth/organization-summary",
+  "title": "🎯 Software Scorecard Dashboard - Final Project Structure",
+  "description": "✅ ORGANIZATION COMPLETE!",
+  "source": "@site/docs/stackhealth/organization-summary.md",
+  "sourceDirName": "stackhealth",
+  "slug": "/stackhealth/organization-summary",
+  "permalink": "/docs/stackhealth/organization-summary",
+  "draft": false,
+  "unlisted": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "stackhealthSidebar",
+  "previous": {
+    "title": "Project Overview",
+    "permalink": "/docs/stackhealth/project-overview"
+  },
+  "next": {
+    "title": "Development Guide",
+    "permalink": "/docs/stackhealth/development"
+  }
+}

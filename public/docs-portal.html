@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Documentation Portal - QAVibe</title>
+    <link rel="stylesheet" href="./src/css/styles.css">
+    <link rel="manifest" href="./manifest.json">
+    <link rel="icon" type="image/svg+xml" href="./favicon.svg">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <script src="./public/components/nav.js" defer></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            new NavigationComponent();
+        });
+    </script>
+
+    <div class="docs-portal">
+        <div class="container">
+            <div class="portal-header">
+                <h1>Documentation Portal</h1>
+                <p>Access comprehensive guides and API documentation for all QAVibe tools</p>
+            </div>
+
+            <div class="docs-grid">
+                <!-- TestFlux Documentation Card -->
+                <div class="docs-card" onclick="window.open('http://localhost:3003/docs/testflux/intro', '_blank')">
+                    <div class="card-icon">
+                        <i class="fas fa-file-alt"></i>
+                    </div>
+                    <div class="card-content">
+                        <h3>TestFlux</h3>
+                        <p>Comprehensive guides and API documentation for TestFlux test management</p>
+                        <a href="#" class="view-docs-btn">
+                            View Docs <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- StackHealth Documentation Card -->
+                <div class="docs-card" onclick="window.open('http://localhost:3003/docs/stackhealth/intro', '_blank')">
+                    <div class="card-icon">
+                        <i class="fas fa-file-alt"></i>
+                    </div>
+                    <div class="card-content">
+                        <h3>StackHealth</h3>
+                        <p>Comprehensive guides and API documentation for StackHealth monitoring</p>
+                        <a href="#" class="view-docs-btn">
+                            View Docs <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- All Documentation Card -->
+                <div class="docs-card full-width" onclick="window.open('http://localhost:3003/docs/', '_blank')">
+                    <div class="card-icon">
+                        <i class="fas fa-book-open"></i>
+                    </div>
+                    <div class="card-content">
+                        <h3>Browse All Documentation</h3>
+                        <p>Access the complete documentation portal with search and navigation</p>
+                        <a href="#" class="view-docs-btn">
+                            Open Portal <i class="fas fa-external-link-alt"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="./public/components/footer.js" defer></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            new FooterComponent();
+        });
+    </script>
+
+    <style>
+        .docs-portal {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            padding: 2rem 0;
+        }
+
+        .portal-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .portal-header h1 {
+            font-size: 2.5rem;
+            color: #2d3748;
+            margin-bottom: 1rem;
+        }
+
+        .portal-header p {
+            font-size: 1.2rem;
+            color: #4a5568;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .docs-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .docs-card {
+            background: #2d3748;
+            border-radius: 16px;
+            padding: 2rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            color: white;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .docs-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(45, 55, 72, 0.3);
+        }
+
+        .docs-card.full-width {
+            grid-column: 1 / -1;
+            max-width: 400px;
+            margin: 1rem auto 0;
+        }
+
+        .card-icon {
+            width: 60px;
+            height: 60px;
+            background: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            font-size: 1.5rem;
+            color: #2d3748;
+        }
+
+        .card-content h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: white;
+        }
+
+        .card-content p {
+            color: #a0aec0;
+            margin-bottom: 2rem;
+            line-height: 1.6;
+        }
+
+        .view-docs-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: #4299e1;
+            font-weight: 600;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .view-docs-btn:hover {
+            color: #63b3ed;
+        }
+
+        .docs-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #4299e1, #63b3ed);
+        }
+
+        @media (max-width: 768px) {
+            .docs-grid {
+                grid-template-columns: 1fr;
+                padding: 0 1rem;
+            }
+
+            .portal-header h1 {
+                font-size: 2rem;
+            }
+
+            .docs-card {
+                padding: 1.5rem;
+            }
+        }
+    </style>
+</body>
+</html>

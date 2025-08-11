@@ -1,0 +1,19 @@
+{
+  "id": "stackhealth/intro",
+  "title": "StackHealth Documentation",
+  "description": "Welcome to StackHealth, QAVibe's comprehensive application monitoring and health management platform.",
+  "source": "@site/docs/stackhealth/intro.md",
+  "sourceDirName": "stackhealth",
+  "slug": "/stackhealth/intro",
+  "permalink": "/docs/stackhealth/intro",
+  "draft": false,
+  "unlisted": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "stackhealthSidebar",
+  "next": {
+    "title": "Project Overview",
+    "permalink": "/docs/stackhealth/project-overview"
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "id": "stackhealth/project-overview",
+  "title": "Project Overview",
+  "description": "🚀 COMPLETION STATUS: READY TO USE!",
+  "source": "@site/docs/stackhealth/project-overview.md",
+  "sourceDirName": "stackhealth",
+  "slug": "/stackhealth/project-overview",
+  "permalink": "/docs/stackhealth/project-overview",
+  "draft": false,
+  "unlisted": false,
+  "tags": [],
+  "version": "current",
+  "sidebarPosition": 1,
+  "frontMatter": {
+    "sidebar_position": 1,
+    "title": "Project Overview"
+  },
+  "sidebar": "stackhealthSidebar",
+  "previous": {
+    "title": "Introduction",
+    "permalink": "/docs/stackhealth/intro"
+  },
+  "next": {
+    "title": "🎯 Software Scorecard Dashboard - Final Project Structure",
+    "permalink": "/docs/stackhealth/organization-summary"
+  }
+}

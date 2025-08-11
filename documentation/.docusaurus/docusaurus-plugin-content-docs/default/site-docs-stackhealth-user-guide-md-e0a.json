@@ -1,0 +1,23 @@
+{
+  "id": "stackhealth/user-guide",
+  "title": "🎯 User Guide - StackHealth Scorecard Platform",
+  "description": "Welcome to StackHealth! This guide will help you get started with tracking and improving your software quality metrics.",
+  "source": "@site/docs/stackhealth/user-guide.md",
+  "sourceDirName": "stackhealth",
+  "slug": "/stackhealth/user-guide",
+  "permalink": "/docs/stackhealth/user-guide",
+  "draft": false,
+  "unlisted": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "stackhealthSidebar",
+  "previous": {
+    "title": "🎯 VS Code Workspace Configuration",
+    "permalink": "/docs/stackhealth/vscode-setup"
+  },
+  "next": {
+    "title": "🚀 Software Scorecard Dashboard v2.0",
+    "permalink": "/docs/stackhealth/v2-features"
+  }
+}

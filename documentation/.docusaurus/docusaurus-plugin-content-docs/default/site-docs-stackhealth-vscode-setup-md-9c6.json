@@ -1,0 +1,23 @@
+{
+  "id": "stackhealth/vscode-setup",
+  "title": "🎯 VS Code Workspace Configuration",
+  "description": "✅ VS Code Setup Complete!",
+  "source": "@site/docs/stackhealth/vscode-setup.md",
+  "sourceDirName": "stackhealth",
+  "slug": "/stackhealth/vscode-setup",
+  "permalink": "/docs/stackhealth/vscode-setup",
+  "draft": false,
+  "unlisted": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "stackhealthSidebar",
+  "previous": {
+    "title": "Development Guide",
+    "permalink": "/docs/stackhealth/development"
+  },
+  "next": {
+    "title": "🎯 User Guide - StackHealth Scorecard Platform",
+    "permalink": "/docs/stackhealth/user-guide"
+  }
+}

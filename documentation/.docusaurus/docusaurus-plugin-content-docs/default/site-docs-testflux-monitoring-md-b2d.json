@@ -1,0 +1,23 @@
+{
+  "id": "testflux/monitoring",
+  "title": "Monitoring & Observability Guide",
+  "description": "This document outlines the comprehensive monitoring and observability strategy for TestFlux, including metrics, logging, alerting, and performance monitoring.",
+  "source": "@site/docs/testflux/monitoring.md",
+  "sourceDirName": "testflux",
+  "slug": "/testflux/monitoring",
+  "permalink": "/docs/testflux/monitoring",
+  "draft": false,
+  "unlisted": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "testfluxSidebar",
+  "previous": {
+    "title": "Test Results Dashboard - Specification Document",
+    "permalink": "/docs/testflux/test-results-dashboard-spec"
+  },
+  "next": {
+    "title": "Enterprise Tools Integration Guide",
+    "permalink": "/docs/testflux/enterprise-tools"
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "id": "stackhealth/v2-features",
+  "title": "🚀 Software Scorecard Dashboard v2.0",
+  "description": "Welcome to the enhanced Software Scorecard Dashboard! This comprehensive platform helps organizations track and improve their software engineering practices across multiple critical areas.",
+  "source": "@site/docs/stackhealth/v2-features.md",
+  "sourceDirName": "stackhealth",
+  "slug": "/stackhealth/v2-features",
+  "permalink": "/docs/stackhealth/v2-features",
+  "draft": false,
+  "unlisted": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "stackhealthSidebar",
+  "previous": {
+    "title": "🎯 User Guide - StackHealth Scorecard Platform",
+    "permalink": "/docs/stackhealth/user-guide"
+  },
+  "next": {
+    "title": "Frontend Authentication Troubleshooting Guide",
+    "permalink": "/docs/stackhealth/frontend-troubleshooting"
+  }
+}

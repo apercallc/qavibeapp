@@ -17,9 +17,13 @@
     "optimize": "npm run build:prod && npm run lighthouse",
     "blog:start": "node server/blog-server-db.js",
     "blog:dev": "nodemon server/blog-server-db.js",
+    "api:start": "node server/api-server.js",
+    "api:dev": "nodemon server/api-server.js",
     "start": "node server/blog-server-db.js",
+    "start:all": "concurrently \"npm run api:start\" \"npm run blog:start\" \"npm run serve\"",
     "start:frontend": "npm run serve",
-    "start:backend": "npm run blog:start"
+    "start:backend": "npm run blog:start",
+    "start:api": "npm run api:start"
   },
   "keywords": [
     "testing",
@@ -38,7 +42,7 @@
   "homepage": "https://qavibeapp.com",
   "repository": {
     "type": "git",
-    "url": "https://github.com/apercallc/qavibeapp.git"
+    "url": "git+https://github.com/apercallc/qavibeapp.git"
   },
   "bugs": {
     "url": "https://github.com/apercallc/qavibeapp/issues"
@@ -50,9 +54,16 @@
     "nodemon": "^3.0.1"
   },
   "dependencies": {
+    "@docusaurus/core": "^3.8.1",
+    "@docusaurus/preset-classic": "^3.8.1",
+    "@docusaurus/theme-search-algolia": "^3.8.1",
+    "axios": "^1.11.0",
     "body-parser": "^1.20.3",
     "cors": "^2.8.5",
+    "dotenv": "^16.6.1",
     "express": "^4.21.2",
+    "express-rate-limit": "^8.0.1",
+    "marked": "^16.1.2",
     "multer": "^1.4.5-lts.1",
     "sqlite3": "^5.1.7"
   },
@@ -64,5 +75,9 @@
     "last 2 versions",
     "not dead",
     "not ie 11"
-  ]
+  ],
+  "directories": {
+    "doc": "docs"
+  },
+  "type": "commonjs"
 }

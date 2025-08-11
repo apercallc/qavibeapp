@@ -1,0 +1,23 @@
+{
+  "id": "stackhealth/security",
+  "title": "Security Policy",
+  "description": "Supported Versions",
+  "source": "@site/docs/stackhealth/security.md",
+  "sourceDirName": "stackhealth",
+  "slug": "/stackhealth/security",
+  "permalink": "/docs/stackhealth/security",
+  "draft": false,
+  "unlisted": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "stackhealthSidebar",
+  "previous": {
+    "title": "Contributing to StackHealth Scorecard Platform",
+    "permalink": "/docs/stackhealth/contributing"
+  },
+  "next": {
+    "title": "📚 StackHealth Documentation",
+    "permalink": "/docs/stackhealth/"
+  }
+}

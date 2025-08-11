@@ -39,16 +39,22 @@
     <meta name="config:announcement_link" content="#products">
     <meta name="config:testflux_url" content="https://testflux.qavibeapp.com">
     <meta name="config:stackhealth_url" content="https://stackhealth.qavibeapp.com">
+    <meta name="config:recaptcha_site_key" content="your-site-key-here">
     
     <!-- Stylesheets -->
-    <link rel="stylesheet" href="../src/css/styles.css">
+    <link rel="stylesheet" href="./styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="https://www.google.com/recaptcha/api.js?onload=onRecaptchaLoad&render=explicit" async defer></script>
     
     <!-- Configuration and Scripts -->
-    <script src="../scripts/config.js" defer></script>
+    <script src="./config.js" defer></script>
+    <script src="./components/nav.js" defer></script>
+    <script src="./components/footer.js" defer></script>
+    <script src="./script.js" defer></script>
 </head>
 <body>
+    <!-- Navigation will be inserted by nav.js -->
     <!-- Announcement Banner -->
     <div id="announcementBanner" class="announcement-banner" style="display: none;">
         <div class="announcement-content">
@@ -62,68 +68,7 @@
         </div>
     </div>
 
-    <!-- Navigation -->
-    <nav class="navbar">
-        <div class="nav-container">
-            <div class="nav-brand">
-                <h2>QAVibe</h2>
-            </div>
-            <div class="nav-menu" id="nav-menu">
-                <a href="#home" class="nav-link">Home</a>
-                <div class="nav-dropdown">
-                    <a href="#products" class="nav-link dropdown-trigger">
-                        Products
-                        <i class="fas fa-chevron-down dropdown-icon"></i>
-                    </a>
-                    <div class="dropdown-content">
-                        <div class="dropdown-item" tabindex="0" onclick="window.QAVibeApp ? window.QAVibeApp.launchProduct('testflux') : launchProduct('testflux')">
-                            <div class="dropdown-item-icon">
-                                <i class="fas fa-tachometer-alt"></i>
-                            </div>
-                            <div class="dropdown-item-content">
-                                <h4>TestFlux</h4>
-                                <p>Test Results Dashboard</p>
-                            </div>
-                            <div class="dropdown-item-action">
-                                <i class="fas fa-external-link-alt"></i>
-                            </div>
-                        </div>
-                        <div class="dropdown-item" tabindex="0" onclick="window.QAVibeApp ? window.QAVibeApp.launchProduct('stackhealth') : launchProduct('stackhealth')">
-                            <div class="dropdown-item-icon">
-                                <i class="fas fa-chart-bar"></i>
-                            </div>
-                            <div class="dropdown-item-content">
-                                <h4>StackHealth</h4>
-                                <p>Scorecard Platform</p>
-                            </div>
-                            <div class="dropdown-item-action">
-                                <i class="fas fa-external-link-alt"></i>
-                            </div>
-                        </div>
-                        <div class="dropdown-divider"></div>
-                        <div class="dropdown-item" tabindex="0" onclick="window.QAVibeApp ? window.QAVibeApp.scrollToProducts() : scrollToProducts()">>
-                            <div class="dropdown-item-icon">
-                                <i class="fas fa-info-circle"></i>
-                            </div>
-                            <div class="dropdown-item-content">
-                                <h4>Learn More</h4>
-                                <p>View detailed information</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <a href="#support" class="nav-link">Support</a>
-                <a href="./blog.html" class="nav-link">Blog</a>
-                <button class="demo-btn">Get a Demo</button>
-            </div>
-            <div class="hamburger" id="hamburger">
-                <span></span>
-                <span></span>
-                <span></span>
-            </div>
-        </div>
-    </nav>
-
+    <!-- Hero Section -->
     <!-- Hero Section -->
     <section id="home" class="hero">
         <div class="hero-container">
@@ -161,10 +106,7 @@
             <div class="hero-visual">
                 <div class="dashboard-preview">
                     <div class="dashboard-header">
-                        <div class="dashboard-tabs">
-                            <span class="tab active">TestFlux</span>
-                            <span class="tab">StackHealth</span>
-                        </div>
+                        <h3>Dashboard Preview</h3>
                     </div>
                     <div class="dashboard-content">
                         <div class="metric-cards">
@@ -382,89 +324,73 @@
                     </div>
                     <h3>Direct Support</h3>
                     <p>Contact our team for technical support and guidance</p>
-                    <a href="#" class="support-link">Get Support <i class="fas fa-arrow-right"></i></a>
+                    <a href="./index.html#support" class="support-link">Get Support <i class="fas fa-arrow-right"></i></a>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-section">
-                    <h3>QAVibe</h3>
-                    <p>Free enterprise testing tools for modern development teams.</p>
-                    <div class="social-links">
-                        <a href="https://thoangdev.github.io/" target="_blank" class="social-link">
-                            <i class="fab fa-github"></i>
-                        </a>
-                    </div>
-                </div>
-                <div class="footer-section">
-                    <h4>Legal</h4>
-                    <ul>
-                        <li><a href="#privacy">Privacy Policy</a></li>
-                        <li><a href="#terms">Terms of Service</a></li>
-                        <li><a href="#acceptable-use">Acceptable Use</a></li>
-                        <li><a href="#legal-center">Legal Center</a></li>
-                    </ul>
-                </div>
-                <div class="footer-section">
-                    <h4>Company</h4>
-                    <ul>
-                        <li><a href="#about">About Us</a></li>
-                        <li><a href="#changelog">Changelog</a></li>
-                        <li><a href="#security">Security & Compliance</a></li>
-                        <li><a href="#integrations">Integrations</a></li>
-                    </ul>
-                </div>
-                <div class="footer-section">
-                    <h4>Support the Project</h4>
-                    <p>Help us keep these tools free for everyone.</p>
-                    <button class="donate-btn" onclick="openDonationModal()">
-                        <i class="fas fa-heart"></i>
-                        Donate
-                    </button>
-                </div>
-            </div>
-            <div class="footer-bottom">
-                <p>&copy; 2025 QAVibe. All rights reserved. Made with ❤️ by <a href="https://thoangdev.github.io/" target="_blank">thoangdev</a></p>
-            </div>
-        </div>
-    </footer>
+    <!-- Footer will be inserted by footer.js -->
 
     <!-- Demo Modal -->
     <div id="demoModal" class="modal">
-        <div class="modal-content">
+        <div class="modal-content demo-modal-content">
             <span class="close" onclick="closeDemoModal()">&times;</span>
             <h2>Get a Demo</h2>
-            <form id="demoForm">
-                <div class="form-group">
-                    <label for="name">Name *</label>
-                    <input type="text" id="name" required>
+            <p>Schedule a personalized demo of our testing tools</p>
+            <form id="demoForm" class="demo-form">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="demoFirstName">First Name *</label>
+                        <input type="text" id="demoFirstName" name="firstName" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="demoLastName">Last Name *</label>
+                        <input type="text" id="demoLastName" name="lastName" required>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="demoEmail">Email *</label>
+                        <input type="email" id="demoEmail" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="demoCompany">Company</label>
+                        <input type="text" id="demoCompany" name="company">
+                    </div>
                 </div>
                 <div class="form-group">
-                    <label for="email">Email *</label>
-                    <input type="email" id="email" required>
-                </div>
-                <div class="form-group">
-                    <label for="company">Company</label>
-                    <input type="text" id="company">
-                </div>
-                <div class="form-group">
-                    <label for="product">Product Interest</label>
-                    <select id="product">
+                    <label for="demoProduct">Product Interest *</label>
+                    <select id="demoProduct" name="product" required>
+                        <option value="">Select a product...</option>
                         <option value="both">Both Products</option>
-                        <option value="testflux">TestFlux Dashboard</option>
-                        <option value="stackhealth">StackHealth Scorecard</option>
+                        <option value="testflux">TestFlux - Test Results Dashboard</option>
+                        <option value="stackhealth">StackHealth - Scorecard Platform</option>
                     </select>
                 </div>
                 <div class="form-group">
-                    <label for="message">Message</label>
-                    <textarea id="message" rows="4" placeholder="Tell us about your testing needs..."></textarea>
+                    <label for="demoMessage">Tell us about your testing needs *</label>
+                    <textarea id="demoMessage" name="message" rows="4" placeholder="Describe your current testing process, team size, challenges, etc." required></textarea>
                 </div>
-                <button type="submit" class="btn-primary">Schedule Demo</button>
+                <div class="form-group">
+                    <label for="demoTimeframe">When would you like to schedule the demo?</label>
+                    <select id="demoTimeframe" name="timeframe">
+                        <option value="">Select timeframe...</option>
+                        <option value="asap">As soon as possible</option>
+                        <option value="this-week">This week</option>
+                        <option value="next-week">Next week</option>
+                        <option value="this-month">Within this month</option>
+                        <option value="flexible">I'm flexible</option>
+                    </select>
+                </div>
+                <div class="form-group captcha-container">
+                    <div class="g-recaptcha" data-sitekey="" id="demo-recaptcha"></div>
+                </div>
+                <button type="submit" class="submit-btn" id="demoSubmitBtn">
+                    <i class="fas fa-calendar"></i>
+                    Schedule Demo
+                </button>
+                <div id="demoFormMessage" class="form-message" style="display: none;"></div>
             </form>
         </div>
     </div>
@@ -485,6 +411,6 @@
         </div>
     </div>
 
-    <script src="../src/js/script.js"></script>
+    <script src="./script.js"></script>
 </body>
 </html>

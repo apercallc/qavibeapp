@@ -1118,6 +1118,15 @@ window.QAVibeApp = {
     launchProduct
 };
 
+// Dashboard demo function
+function openDashboardDemo() {
+    // Track dashboard demo click
+    trackEvent('dashboard_demo_click', 'interaction', 'dashboard');
+    
+    // Open demo modal or redirect to products
+    openDemoModal();
+}
+
 // Mobile-specific enhancements
 function initMobileEnhancements() {
     // Prevent zoom on input focus for iOS

@@ -189,7 +189,6 @@ class BlogManager {
                 content: "Test automation is essential for modern software development. In this comprehensive guide, we'll cover the basics of setting up automated tests, choosing the right tools, and implementing best practices for your testing strategy.\n\n## Why Test Automation?\n\nTest automation provides numerous benefits:\n- Faster feedback cycles\n- Consistent test execution\n- Improved test coverage\n- Cost reduction over time\n\n## Getting Started\n\nWhen beginning your automation journey, consider these key factors...",
                 tags: ["automation", "testing", "beginners"],
                 labels: ["tutorial", "guide"],
-                image: null,
                 date: new Date(Date.now() - 86400000).toISOString(),
                 author: "QAVibe Team"
             },
@@ -200,7 +199,6 @@ class BlogManager {
                 content: "We're excited to announce the latest update to TestFlux Dashboard! This release brings powerful new features that will streamline your testing workflow and provide better insights into your test results.\n\n## What's New\n\n### Enhanced Reporting\nOur new reporting engine provides more detailed insights...\n\n### Custom Dashboards\nCreate personalized dashboards that focus on the metrics that matter most to your team...\n\n### Improved CI/CD Integration\nSeamless integration with popular CI/CD platforms...",
                 tags: ["testflux", "features", "dashboard"],
                 labels: ["announcement", "news"],
-                image: null,
                 date: new Date(Date.now() - 172800000).toISOString(),
                 author: "Product Team"
             },
@@ -211,7 +209,6 @@ class BlogManager {
                 content: "Code quality is crucial for maintainable software. StackHealth provides comprehensive scorecards that help you track and improve various aspects of your codebase quality.\n\n## Key Metrics\n\nStackHealth tracks several important metrics:\n\n### Security Score\nIdentifies potential security vulnerabilities and provides recommendations for fixes.\n\n### Performance Score\nAnalyzes code performance patterns and suggests optimizations.\n\n### Maintainability Score\nEvaluates code complexity, documentation, and structural quality.\n\n## Implementation Guide\n\nTo get started with StackHealth scorecards...",
                 tags: ["stackhealth", "quality", "metrics"],
                 labels: ["tutorial", "guide"],
-                image: null,
                 date: new Date(Date.now() - 259200000).toISOString(),
                 author: "QA Team"
             }
@@ -280,10 +277,6 @@ class BlogManager {
             });
         };
         
-        const imageHTML = post.image ? 
-            `<img src="${post.image}" alt="${post.title}">` :
-            `<i class="fas fa-file-alt"></i>`;
-            
         const tagsHTML = post.tags.map(tag => 
             `<span class="post-tag">${tag}</span>`
         ).join('');
@@ -305,9 +298,6 @@ class BlogManager {
         
         return `
             <article class="post-card" onclick="blogManager.openPost(${post.id})">
-                <div class="post-image">
-                    ${imageHTML}
-                </div>
                 <div class="post-content">
                     <div class="post-meta">
                         <div class="post-date">
@@ -368,9 +358,6 @@ class BlogManager {
                             ${post.author}
                         </div>
                     </div>
-                    ${post.image ? `<div class="post-modal-image">
-                        <img src="${post.image}" alt="${post.title}">
-                    </div>` : ''}
                     <div class="post-modal-content">
                         ${post.content.split('\\n').map(line => 
                             line.startsWith('#') ? 
@@ -516,7 +503,6 @@ function showNewPostModal() {
     document.getElementById('newPostModal').style.display = 'block';
     document.getElementById('newPostModal').removeAttribute('data-editing');
     document.getElementById('newPostForm').reset();
-    resetImagePreview();
 }
 
 function closeNewPostModal() {
@@ -569,25 +555,6 @@ function showNewPostModal() {
     document.getElementById('newPostModal').style.display = 'block';
     document.getElementById('newPostModal').removeAttribute('data-editing');
     document.getElementById('newPostForm').reset();
-}
-
-function resetImagePreview() {
-    const preview = document.getElementById('imagePreview');
-    preview.innerHTML = '<i class="fas fa-image"></i><span>Click to upload image</span>';
-    preview.classList.remove('has-image');
-}
-
-function previewImage(event) {
-    const file = event.target.files[0];
-    if (file) {
-        const reader = new FileReader();
-        reader.onload = function(e) {
-            const preview = document.getElementById('imagePreview');
-            preview.innerHTML = `<img src="${e.target.result}" alt="Preview">`;
-            preview.classList.add('has-image');
-        };
-        reader.readAsDataURL(file);
-    }
 }
 
 function filterByTag(tag) {

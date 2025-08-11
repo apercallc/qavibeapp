@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - QAVibe</title>
+    <meta name="description" content="Learn about QAVibe's mission to provide free enterprise-grade testing tools for everyone.">
+    
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="./styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <!-- Configuration and Scripts -->
+    <script src="./config.js" defer></script>
+    <script src="./components/nav.js" defer></script>
+    <script src="./components/footer.js" defer></script>
+    <script src="./script.js" defer></script>
+</head>
+<body>
+    <!-- Fallback Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <a href="./index.html" style="text-decoration: none; color: inherit;">
+                    <h2>QAVibe</h2>
+                </a>
+            </div>
+            <div class="nav-menu" id="nav-menu">
+                <a href="./index.html" class="nav-link">Home</a>
+                <a href="./index.html#products" class="nav-link">Products</a>
+                <a href="./index.html#support" class="nav-link">Support</a>
+                <a href="./blog.html" class="nav-link">Blog</a>
+                <button class="demo-btn" onclick="openDemoModal()">Get a Demo</button>
+            </div>
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" style="padding: 6rem 0 4rem 0;">
+        <div class="hero-container">
+            <div class="hero-content" style="text-align: center;">
+                <h1>About QAVibe</h1>
+                <p class="hero-description">
+                    We believe that high-quality testing tools should be accessible to everyone, 
+                    regardless of budget constraints.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Content Section -->
+    <section class="container" style="padding: 4rem 0;">
+        <div style="max-width: 800px; margin: 0 auto;">
+            <h2>Our Mission</h2>
+            <p style="font-size: 1.1rem; line-height: 1.7; margin-bottom: 2rem;">
+                QAVibe was founded with a simple but powerful mission: to democratize access to enterprise-grade testing tools. 
+                We've seen too many talented developers and small teams struggle with limited resources while trying to maintain 
+                high software quality standards.
+            </p>
+
+            <h2>Why We're Different</h2>
+            <div class="benefits-grid" style="margin: 2rem 0;">
+                <div class="benefit-card">
+                    <div class="benefit-icon">
+                        <i class="fas fa-heart"></i>
+                    </div>
+                    <h3>Truly Free</h3>
+                    <p>No hidden costs, no freemium limitations, no "pay to unlock" features. Everything is completely free.</p>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-icon">
+                        <i class="fas fa-code"></i>
+                    </div>
+                    <h3>Built by Developers</h3>
+                    <p>Created by developers who understand the real challenges of software testing and quality assurance.</p>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-icon">
+                        <i class="fas fa-globe"></i>
+                    </div>
+                    <h3>Community Driven</h3>
+                    <p>We listen to our users and continuously improve based on real-world feedback and needs.</p>
+                </div>
+            </div>
+
+            <h2>Our Products</h2>
+            <p style="font-size: 1.1rem; line-height: 1.7; margin-bottom: 2rem;">
+                We currently offer two powerful platforms:
+            </p>
+            
+            <div style="background: #f8fafc; padding: 2rem; border-radius: 0.5rem; margin-bottom: 1.5rem;">
+                <h3><i class="fas fa-tachometer-alt" style="color: #2563eb; margin-right: 0.5rem;"></i>TestFlux</h3>
+                <p>Our test results dashboard aggregates, stores, and visualizes automated test results from popular testing frameworks like Playwright, ZAP, and k6. Perfect for teams who want enterprise-level insights without enterprise-level costs.</p>
+            </div>
+
+            <div style="background: #f8fafc; padding: 2rem; border-radius: 0.5rem; margin-bottom: 2rem;">
+                <h3><i class="fas fa-chart-bar" style="color: #2563eb; margin-right: 0.5rem;"></i>StackHealth</h3>
+                <p>Our comprehensive software quality assessment platform provides scorecards, analytics, PDF reports, and product management capabilities. Get a complete picture of your software stack's health and security posture.</p>
+            </div>
+
+            <h2>Our Commitment</h2>
+            <p style="font-size: 1.1rem; line-height: 1.7; margin-bottom: 1rem;">
+                We're committed to:
+            </p>
+            <ul style="font-size: 1.1rem; line-height: 1.7; margin-bottom: 2rem; padding-left: 1.5rem;">
+                <li>Keeping all our tools completely free</li>
+                <li>Maintaining enterprise-grade security and reliability</li>
+                <li>Continuously improving based on user feedback</li>
+                <li>Supporting the global developer community</li>
+                <li>Transparent development and open communication</li>
+            </ul>
+
+            <h2>Get Involved</h2>
+            <p style="font-size: 1.1rem; line-height: 1.7; margin-bottom: 2rem;">
+                QAVibe is more than just free tools—it's a community. We welcome feedback, feature requests, bug reports, 
+                and contributions from users around the world. Together, we're building the future of accessible software testing.
+            </p>
+
+            <div style="text-align: center; margin-top: 3rem;">
+                <a href="./index.html#products" class="btn-primary" style="display: inline-flex; align-items: center; gap: 0.5rem; text-decoration: none;">
+                    <i class="fas fa-rocket"></i>
+                    Try Our Tools
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Fallback Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>QAVibe</h3>
+                    <p>Free enterprise testing tools for modern development teams.</p>
+                    <div class="social-links">
+                        <a href="https://thoangdev.github.io/" target="_blank" class="social-link" rel="noopener noreferrer">
+                            <i class="fab fa-github"></i>
+                        </a>
+                        <a href="https://www.linkedin.com/in/tommyqhoang/" target="_blank" class="social-link" rel="noopener noreferrer">
+                            <i class="fab fa-linkedin"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h4>Products</h4>
+                    <ul>
+                        <li><a href="https://testflux.qavibeapp.com" target="_blank">TestFlux</a></li>
+                        <li><a href="https://stackhealth.qavibeapp.com" target="_blank">StackHealth</a></li>
+                        <li><a href="./index.html#products">Learn More</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Resources</h4>
+                    <ul>
+                        <li><a href="./blog.html">Blog</a></li>
+                        <li><a href="./changelog.html">Changelog</a></li>
+                        <li><a href="./index.html#support">Support</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Legal</h4>
+                    <ul>
+                        <li><a href="./privacy-policy.html">Privacy Policy</a></li>
+                        <li><a href="./terms-of-service.html">Terms of Service</a></li>
+                        <li><a href="./acceptable-use.html">Acceptable Use</a></li>
+                        <li><a href="./legal-center.html">Legal Center</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 QAVibe. All rights reserved. Made with ❤️ by <a href="https://thoangdev.github.io/" target="_blank" rel="noopener noreferrer">thoangdev</a></p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

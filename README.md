@@ -4,15 +4,21 @@ QAVibe is the central landing page and blog platform for a suite of free, enterp
 
 ## ✨ Features
 
-- **🎯 Modern Landing Page**: Professional showcase of TestFlux and StackHealth products
-- **📱 Fully Responsive**: Optimized for desktop, tablet, and mobile devices  
+- **🎯 Interactive Dashboard**: Clickable product showcase with tab switching between TestFlux and StackHealth
+- **� Comprehensive Documentation**: Full Docusaurus documentation system with search and navigation
+- **�📱 Fully Responsive**: Optimized for desktop, tablet, and mobile devices  
 - **📝 Integrated Blog System**: Admin-managed blog with full CRUD operations
+- **🤝 Support System**: Professional support forms with Slack integration
+- **🚀 Demo Requests**: Modal-based demo scheduling with CAPTCHA protection
 - **🔐 Admin Panel**: Secure blog management with password protection
 - **💾 SQLite Database**: Persistent data storage for blog posts
 - **🔔 Announcement System**: Configurable top banner for important messages
 - **⚡ PWA Ready**: Progressive Web App capabilities with service worker
-- **🎨 Professional UI/UX**: Clean design with smooth animations
+- **🎨 Professional UI/UX**: Clean design with smooth animations and transitions
 - **🔍 SEO Optimized**: Proper meta tags, structured data, and performance
+- **🛡️ Security**: Google reCAPTCHA v2 integration and form validation
+- **⚡ Rate Limiting**: Comprehensive API rate limiting to prevent abuse
+- **📊 Multi-Server Architecture**: Blog, Forms, and Documentation APIs for optimal performance
 
 ## 🛠️ Tech Stack
 
@@ -24,8 +30,11 @@ QAVibe is the central landing page and blog platform for a suite of free, enterp
 
 ### Backend  
 - **Node.js** - Runtime environment
-- **Express.js** - Web framework for API endpoints
+- **Express.js** - Multi-server architecture (Blog API + Forms API + Documentation)
+- **Docusaurus 3.8.1** - Documentation system with search and theming
 - **SQLite3** - Lightweight database for blog data
+- **Slack Webhooks** - Real-time form notifications
+- **Google reCAPTCHA** - Spam protection and security
 - **CORS** - Cross-origin resource sharing support
 
 ### Development
@@ -57,7 +66,16 @@ qavibeapp/
 │
 ├── 🔧 Backend & Scripts
 │   ├── server/
-│   │   └── blog-server-db.js   # Express server with SQLite
+│   │   ├── blog-server-db.js   # Blog API server (port 3001)
+│   │   └── api-server.js       # Forms API server (port 3002)
+│   │
+│   ├── documentation/          # Docusaurus documentation system
+│   │   ├── docs/              # Documentation content
+│   │   │   ├── testflux/      # TestFlux documentation
+│   │   │   └── stackhealth/   # StackHealth documentation
+│   │   ├── docusaurus.config.js # Documentation configuration
+│   │   ├── sidebars.js        # Navigation structure
+│   │   └── src/css/          # Custom documentation styling
 │   │
 │   └── scripts/
 │       ├── config.js           # Configuration management
@@ -113,7 +131,7 @@ qavibeapp/
 
    **Option A: Quick Start (Recommended)**
    ```bash
-   # Single command to start both servers
+   # Single command to start all servers
    ./start.sh
    ```
 
@@ -122,6 +140,12 @@ qavibeapp/
    # Start the blog backend server (port 3001)
    npm run start:backend
    
+   # Start the API server for forms (port 3002)
+   node server/api-server.js
+   
+   # Start the documentation server (port 3003)
+   cd documentation && npm start
+   
    # In another terminal, start the frontend server (port 8002)
    npm run start:frontend
    ```
@@ -129,6 +153,9 @@ qavibeapp/
 5. **Access the application**
    - Main website: http://localhost:8002
    - Blog: http://localhost:8002/blog.html
+   - Support: http://localhost:8002/support.html
+   - Documentation: http://localhost:3003/docs/
+   - Documentation Portal: http://localhost:8002/docs-portal.html
    - Admin login: Password is `admin123` (configurable in .env)
 
 ### Production Deployment
@@ -140,7 +167,7 @@ The application is production-ready with multiple hosting options:
 - **Docker**: Containerized deployment for any platform
 - **VPS**: Full control with custom server setup
 
-See `DEPLOY-GUIDE.md` for detailed deployment instructions.
+See `docs/DEPLOY-GUIDE.md` for detailed deployment instructions and `docs/RATE-LIMITING.md` for security configuration.
 
 ## 🛠️ Tools Showcased
 
@@ -166,7 +193,27 @@ Enterprise software quality assessment and reporting tool:
 - ✅ **Dashboard Analytics**: Real-time quality metrics
 - ✅ **Product Management**: Multi-project oversight
 
-## � Blog System
+## 📚 Documentation System
+
+### Features
+- **🔍 Search Functionality**: Built-in search across all documentation with Algolia support
+- **📱 Mobile Responsive**: Optimized documentation experience on all devices
+- **🎨 QAVibe Branding**: Custom styling that matches main site design
+- **📖 Left Navigation**: Categorized sidebar navigation for easy browsing
+- **🚀 Fast Loading**: Optimized for quick access and smooth navigation
+- **🔗 Deep Linking**: Direct links to specific documentation sections
+
+### Product Documentation
+- **TestFlux**: Setup guides, architecture, deployment, enterprise tools, monitoring
+- **StackHealth**: User guides, development, V2 features, troubleshooting, community
+
+### Access Points
+- Documentation Portal: http://localhost:3003/docs/
+- From Main Site: Click "Documentation" in navigation
+- Quick Access: Use dropdown menu for direct product links
+- Portal Overview: Visit `/docs-portal.html` for card-based interface
+
+## 📝 Blog System
 
 ### Features
 - **✍️ Rich Text Editor**: Easy content creation with markdown support
@@ -238,10 +285,19 @@ CREATE TABLE admin_config (
 SITE_URL=https://qavibeapp.com
 NODE_ENV=production
 PORT=3001
+API_PORT=3002
 
 # Blog Settings
 BLOG_ADMIN_PASSWORD=your-secure-password
 DATABASE_PATH=./blog.db
+
+# Slack Integration
+SLACK_SUPPORT_WEBHOOK=https://hooks.slack.com/services/YOUR/SUPPORT/WEBHOOK
+SLACK_DEMO_WEBHOOK=https://hooks.slack.com/services/YOUR/DEMO/WEBHOOK
+
+# Google reCAPTCHA
+RECAPTCHA_SITE_KEY=your-recaptcha-site-key
+RECAPTCHA_SECRET_KEY=your-recaptcha-secret-key
 
 # Announcement Banner
 ANNOUNCEMENT_ENABLED=true
@@ -256,6 +312,7 @@ SENTRY_DSN=https://your-sentry-dsn
 ENABLE_BLOG=true
 ENABLE_PWA=true
 ENABLE_ADMIN_PANEL=true
+ENABLE_SUPPORT_FORMS=true
 ```
 
 ## 🚀 Deployment Options

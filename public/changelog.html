@@ -3,115 +3,274 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>QAVibe - Product Changelog</title>
-    <link rel="stylesheet" href="css/styles.css">
+    <title>QAVibe - Changelog</title>
+    <meta name="description" content="Stay updated with the latest changes and improvements to QAVibe products.">
+    
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="./styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <!-- Scripts -->
+    <script src="./config.js" defer></script>
+    <script src="./components/nav.js" defer></script>
+    <script src="./components/footer.js" defer></script>
+    <script src="./changelog.js" defer></script>
+    <script src="./script.js" defer></script>
+    
     <style>
         .changelog-container {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 20px;
+            padding: 2rem;
         }
-        .filter-controls {
-            margin: 20px 0;
+        
+        .changelog-header {
             text-align: center;
-        }
-        .filter-btn {
-            padding: 8px 16px;
-            margin: 0 5px;
-            border: 2px solid #ddd;
-            background: white;
-            cursor: pointer;
-            border-radius: 5px;
-            transition: all 0.3s ease;
-        }
-        .filter-btn.active {
-            background: #007acc;
+            margin-bottom: 3rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
-            border-color: #007acc;
+            padding: 4rem 2rem;
+            border-radius: 12px;
         }
-        .changelog-entry {
-            margin: 20px 0;
-            border-left: 4px solid #ddd;
-            padding: 15px;
-            background: #f9f9f9;
-            border-radius: 0 5px 5px 0;
+        
+        .changelog-header h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
         }
-        .changelog-entry.testflux {
-            border-left-color: #007acc;
+        
+        .changelog-header p {
+            font-size: 1.25rem;
+            opacity: 0.9;
         }
-        .changelog-entry.stackhealth {
-            border-left-color: #28a745;
-        }
-        .entry-header {
+        
+        .product-selector {
             display: flex;
-            justify-content: space-between;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+        
+        .product-btn {
+            padding: 1rem 2rem;
+            border: 2px solid #e2e8f0;
+            background: white;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+            display: flex;
             align-items: center;
-            margin-bottom: 10px;
+            gap: 0.5rem;
         }
-        .product-tag {
-            padding: 4px 8px;
-            border-radius: 3px;
+        
+        .product-btn:hover {
+            border-color: #667eea;
+            background: #f8faff;
+        }
+        
+        .product-btn.active {
+            border-color: #667eea;
+            background: #667eea;
             color: white;
-            font-size: 0.8em;
-            font-weight: bold;
         }
-        .product-tag.testflux {
-            background: #007acc;
+        
+        .product-btn i {
+            font-size: 1.25rem;
         }
-        .product-tag.stackhealth {
-            background: #28a745;
+        
+        .changelog-content {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            min-height: 400px;
         }
-        .entry-date {
-            color: #666;
-            font-size: 0.9em;
+        
+        .loading {
+            text-align: center;
+            padding: 3rem;
+            color: #64748b;
         }
-        .entry-version {
-            font-size: 1.1em;
-            font-weight: bold;
-            color: #333;
+        
+        .loading i {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            animation: spin 1s linear infinite;
         }
-        .entry-content {
+        
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        
+        .changelog-content h1 {
+            color: #1e293b;
+            border-bottom: 3px solid #667eea;
+            padding-bottom: 0.5rem;
+            margin-bottom: 2rem;
+        }
+        
+        .changelog-content h2 {
+            color: #334155;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+            padding: 0.5rem 1rem;
+            background: #f8faff;
+            border-left: 4px solid #667eea;
+        }
+        
+        .changelog-content h3 {
+            color: #475569;
+            margin-top: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .changelog-content ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        
+        .changelog-content li {
+            position: relative;
+            padding-left: 1.5rem;
+            margin-bottom: 0.5rem;
             line-height: 1.6;
+        }
+        
+        .changelog-content li::before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            color: #667eea;
+            font-weight: bold;
+        }
+        
+        .changelog-content code {
+            background: #f1f5f9;
+            padding: 0.125rem 0.25rem;
+            border-radius: 3px;
+            font-size: 0.875rem;
+        }
+        
+        .error-message {
+            text-align: center;
+            padding: 3rem;
+            color: #dc2626;
+        }
+        
+        .error-message i {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+        
+        @media (max-width: 768px) {
+            .changelog-header h1 {
+                font-size: 2rem;
+            }
+            
+            .changelog-header p {
+                font-size: 1rem;
+            }
+            
+            .product-selector {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .product-btn {
+                width: 100%;
+                max-width: 300px;
+                justify-content: center;
+            }
+            
+            .changelog-container {
+                padding: 1rem;
+            }
         }
     </style>
 </head>
 <body>
-    <!-- Navigation will be injected here -->
-    <div class="changelog-container">
-        <h1>Product Changelog</h1>
-        <p>Latest updates and releases for TestFlux and StackHealth</p>
-        
-        <div class="filter-controls">
-            <button class="filter-btn active" data-filter="all">All Products</button>
-            <button class="filter-btn" data-filter="testflux">TestFlux</button>
-            <button class="filter-btn" data-filter="stackhealth">StackHealth</button>
+    <!-- Navigation will be inserted by nav.js -->
+
+    <!-- Main Content -->
+    <!-- Main Content -->
+    <main class="changelog-container">
+        <div class="changelog-header">
+            <h1>Changelog</h1>
+            <p>Stay updated with the latest changes and improvements to our products</p>
         </div>
-        
-        <div class="changelog-entries">
-            
+
+        <div class="product-selector">
+            <button class="product-btn active" data-product="testflux" onclick="selectProduct('testflux')">
+                <i class="fas fa-tachometer-alt"></i>
+                TestFlux
+            </button>
+            <button class="product-btn" data-product="stackhealth" onclick="selectProduct('stackhealth')">
+                <i class="fas fa-chart-bar"></i>
+                StackHealth
+            </button>
+        </div>
+
+        <div class="changelog-content" id="changelogContent">
+            <div class="loading">
+                <i class="fas fa-spinner"></i>
+                <p>Loading changelog...</p>
+            </div>
+        </div>
+    </main>
+
+    <!-- Demo Modal (reuse from main page) -->
+    <div id="demoModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Request a Demo</h3>
+                <button class="modal-close" onclick="closeDemoModal()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <form id="demoForm" onsubmit="submitDemoRequest(event)">
+                <div class="form-group">
+                    <label for="demoName">Full Name *</label>
+                    <input type="text" id="demoName" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="demoEmail">Email *</label>
+                    <input type="email" id="demoEmail" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="demoCompany">Company</label>
+                    <input type="text" id="demoCompany">
+                </div>
+                
+                <div class="form-group">
+                    <label for="demoProduct">Product of Interest *</label>
+                    <select id="demoProduct" required>
+                        <option value="">Select a product</option>
+                        <option value="TestFlux">TestFlux - Test Results Dashboard</option>
+                        <option value="StackHealth">StackHealth - Scorecard Platform</option>
+                        <option value="Both">Both Products</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="demoMessage">Message</label>
+                    <textarea id="demoMessage" rows="4" placeholder="Tell us about your testing needs..."></textarea>
+                </div>
+                
+                <div class="form-actions">
+                    <button type="button" class="btn btn-secondary" onclick="closeDemoModal()">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Request Demo</button>
+                </div>
+            </form>
         </div>
     </div>
-    
-    <script>
-        // Filter functionality
-        document.querySelectorAll('.filter-btn').forEach(btn => {
-            btn.addEventListener('click', () => {
-                const filter = btn.dataset.filter;
-                
-                // Update active button
-                document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-                btn.classList.add('active');
-                
-                // Filter entries
-                document.querySelectorAll('.changelog-entry').forEach(entry => {
-                    if (filter === 'all' || entry.dataset.product === filter) {
-                        entry.style.display = 'block';
-                    } else {
-                        entry.style.display = 'none';
-                    }
-                });
-            });
-        });
-    </script>
+
+    <!-- Footer will be inserted by footer.js -->
+
+    <div id="notification" class="notification"></div>
 </body>
 </html>

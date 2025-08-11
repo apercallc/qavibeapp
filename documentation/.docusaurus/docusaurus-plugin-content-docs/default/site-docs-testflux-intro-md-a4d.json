@@ -1,0 +1,19 @@
+{
+  "id": "testflux/intro",
+  "title": "TestFlux Documentation",
+  "description": "Welcome to TestFlux, QAVibe's powerful test management and execution platform.",
+  "source": "@site/docs/testflux/intro.md",
+  "sourceDirName": "testflux",
+  "slug": "/testflux/intro",
+  "permalink": "/docs/testflux/intro",
+  "draft": false,
+  "unlisted": false,
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "testfluxSidebar",
+  "next": {
+    "title": "Setup Complete Guide",
+    "permalink": "/docs/testflux/setup-complete"
+  }
+}

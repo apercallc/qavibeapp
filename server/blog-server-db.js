@@ -3,6 +3,8 @@ const sqlite3 = require('sqlite3').verbose();
 const path = require('path');
 const cors = require('cors');
 const bodyParser = require('body-parser');
+const fs = require('fs');
+const { marked } = require('marked');
 
 const app = express();
 const PORT = process.env.PORT || 3001;
@@ -161,19 +163,39 @@ Getting started with StackHealth is straightforward:
     });
 });
 
-// Helper function to extract image URLs from description
-const extractImageFromDescription = (description) => {
-    const imgRegex = /!\[.*?\]\((.*?)\)/;
-    const match = description.match(imgRegex);
-    return match ? match[1] : null;
-};
-
-// Helper function to clean description (remove image markdown)
-const cleanDescription = (description) => {
-    return description.replace(/!\[.*?\]\(.*?\)\s*/g, '').trim();
-};
-
 // API Routes
+
+// Changelog endpoint
+app.get('/api/changelog/:product', (req, res) => {
+    const { product } = req.params;
+    
+    // Validate product parameter
+    if (!['testflux', 'stackhealth'].includes(product)) {
+        return res.status(400).json({ success: false, error: 'Invalid product specified' });
+    }
+    
+    const changelogPath = path.join(__dirname, '..', 'docs', 'changelogs', `${product}-changelog.md`);
+    
+    try {
+        // Check if file exists
+        if (!fs.existsSync(changelogPath)) {
+            return res.status(404).json({ success: false, error: 'Changelog not found' });
+        }
+        
+        // Read the markdown file
+        const markdownContent = fs.readFileSync(changelogPath, 'utf8');
+        
+        // Convert markdown to HTML
+        const htmlContent = marked.parse(markdownContent);
+        
+        // Return HTML content
+        res.send(htmlContent);
+        
+    } catch (error) {
+        console.error('Error loading changelog:', error);
+        res.status(500).json({ success: false, error: 'Failed to load changelog' });
+    }
+});
 
 // Get all posts (public)
 app.get('/api/posts', (req, res) => {
@@ -185,11 +207,10 @@ app.get('/api/posts', (req, res) => {
         const posts = rows.map(row => ({
             id: row.id,
             title: row.title,
-            description: cleanDescription(row.description),
+            description: row.description,
             content: row.content,
             tags: row.tags ? row.tags.split(',') : [],
             labels: row.labels ? row.labels.split(',') : [],
-            image: extractImageFromDescription(row.description),
             date: row.created_at,
             author: row.author
         }));
@@ -211,11 +232,10 @@ app.get('/api/posts/:id', (req, res) => {
         const post = {
             id: row.id,
             title: row.title,
-            description: cleanDescription(row.description),
+            description: row.description,
             content: row.content,
             tags: row.tags ? row.tags.split(',') : [],
             labels: row.labels ? row.labels.split(',') : [],
-            image: extractImageFromDescription(row.description),
             date: row.created_at,
             author: row.author
         };
@@ -281,11 +301,10 @@ app.post('/api/posts', requireAdmin, (req, res) => {
                 const post = {
                     id: row.id,
                     title: row.title,
-                    description: cleanDescription(row.description),
+                    description: row.description,
                     content: row.content,
                     tags: row.tags ? row.tags.split(',') : [],
                     labels: row.labels ? row.labels.split(',') : [],
-                    image: extractImageFromDescription(row.description),
                     date: row.created_at,
                     author: row.author
                 };
@@ -330,11 +349,10 @@ app.put('/api/posts/:id', requireAdmin, (req, res) => {
                 const post = {
                     id: row.id,
                     title: row.title,
-                    description: cleanDescription(row.description),
+                    description: row.description,
                     content: row.content,
                     tags: row.tags ? row.tags.split(',') : [],
                     labels: row.labels ? row.labels.split(',') : [],
-                    image: extractImageFromDescription(row.description),
                     date: row.created_at,
                     author: row.author
                 };
