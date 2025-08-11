@@ -1,0 +1,107 @@
+name: Sync Documentation from Private Repos
+
+on:
+  schedule:
+    # Run every 6 hours
+    - cron: '0 */6 * * *'
+  workflow_dispatch: # Allow manual trigger
+  repository_dispatch: # Allow webhook trigger from private repos
+    types: [docs-updated]
+
+jobs:
+  sync-docs:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pages: write
+      id-token: write
+    
+    steps:
+    - name: Checkout public repo
+      uses: actions/checkout@v4
+      with:
+        token: ${{ secrets.GITHUB_TOKEN }}
+        fetch-depth: 0
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18'
+        cache: 'npm'
+
+    - name: Install dependencies
+      run: npm ci
+
+    - name: Create docs directories
+      run: |
+        mkdir -p docs/products/testflux
+        mkdir -p docs/products/stackhealth
+        mkdir -p docs/changelogs
+
+    - name: Sync TestFlux docs
+      env:
+        GITHUB_TOKEN: ${{ secrets.PRIVATE_REPO_TOKEN }}
+      run: |
+        # Clone private repo to temp directory
+        git clone https://github.com/apercallc/testflux.git temp-testflux
+        
+        # Copy docs folder
+        if [ -d "temp-testflux/docs" ]; then
+          cp -r temp-testflux/docs/* docs/products/testflux/
+        fi
+        
+        # Copy changelog
+        if [ -f "temp-testflux/CHANGELOG.md" ]; then
+          cp temp-testflux/CHANGELOG.md docs/changelogs/testflux-changelog.md
+          # Add product header to changelog
+          sed -i '1i# TestFlux Changelog\n' docs/changelogs/testflux-changelog.md
+        fi
+        
+        # Clean up
+        rm -rf temp-testflux
+
+    - name: Sync StackHealth docs
+      env:
+        GITHUB_TOKEN: ${{ secrets.PRIVATE_REPO_TOKEN }}
+      run: |
+        # Clone private repo to temp directory
+        git clone https://github.com/apercallc/stackhealth.git temp-stackhealth
+        
+        # Copy docs folder
+        if [ -d "temp-stackhealth/docs" ]; then
+          cp -r temp-stackhealth/docs/* docs/products/stackhealth/
+        fi
+        
+        # Copy changelog
+        if [ -f "temp-stackhealth/CHANGELOG.md" ]; then
+          cp temp-stackhealth/CHANGELOG.md docs/changelogs/stackhealth-changelog.md
+          # Add product header to changelog
+          sed -i '1i# StackHealth Changelog\n' docs/changelogs/stackhealth-changelog.md
+        fi
+        
+        # Clean up
+        rm -rf temp-stackhealth
+
+    - name: Generate combined changelog
+      run: node scripts/generate-changelog.js
+
+    - name: Build documentation site
+      run: npm run build
+
+    - name: Commit and push changes
+      run: |
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        git add docs/ public/
+        if git diff --staged --quiet; then
+          echo "No changes to commit"
+        else
+          git commit -m "Auto-sync docs from private repos [$(date)]"
+          git push
+        fi
+
+    - name: Deploy to GitHub Pages
+      uses: actions/deploy-pages@v4
+      with:
+        artifact_name: github-pages
+        folder: public
