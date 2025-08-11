@@ -2,8 +2,8 @@ name: Sync Documentation from Private Repos
 
 on:
   schedule:
-    # Run every 6 hours
-    - cron: '0 */6 * * *'
+    # Run every morning at 6:00 AM UTC
+    - cron: '0 6 * * *'
   workflow_dispatch: # Allow manual trigger
   repository_dispatch: # Allow webhook trigger from private repos
     types: [docs-updated]
@@ -42,8 +42,8 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.PRIVATE_REPO_TOKEN }}
       run: |
-        # Clone private repo to temp directory
-        git clone https://github.com/apercallc/testflux.git temp-testflux
+        # Clone private repo to temp directory using token authentication
+        git clone https://$GITHUB_TOKEN@github.com/apercallc/testflux.git temp-testflux
         
         # Copy docs folder
         if [ -d "temp-testflux/docs" ]; then
@@ -64,8 +64,8 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.PRIVATE_REPO_TOKEN }}
       run: |
-        # Clone private repo to temp directory
-        git clone https://github.com/apercallc/stackhealth.git temp-stackhealth
+        # Clone private repo to temp directory using token authentication
+        git clone https://$GITHUB_TOKEN@github.com/apercallc/stackhealth.git temp-stackhealth
         
         # Copy docs folder
         if [ -d "temp-stackhealth/docs" ]; then
@@ -99,9 +99,3 @@ jobs:
           git commit -m "Auto-sync docs from private repos [$(date)]"
           git push
         fi
-
-    - name: Deploy to GitHub Pages
-      uses: actions/deploy-pages@v4
-      with:
-        artifact_name: github-pages
-        folder: public
