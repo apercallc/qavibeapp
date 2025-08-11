@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QAVibe - Product Changelog</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <style>
+        .changelog-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .filter-controls {
+            margin: 20px 0;
+            text-align: center;
+        }
+        .filter-btn {
+            padding: 8px 16px;
+            margin: 0 5px;
+            border: 2px solid #ddd;
+            background: white;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+        .filter-btn.active {
+            background: #007acc;
+            color: white;
+            border-color: #007acc;
+        }
+        .changelog-entry {
+            margin: 20px 0;
+            border-left: 4px solid #ddd;
+            padding: 15px;
+            background: #f9f9f9;
+            border-radius: 0 5px 5px 0;
+        }
+        .changelog-entry.testflux {
+            border-left-color: #007acc;
+        }
+        .changelog-entry.stackhealth {
+            border-left-color: #28a745;
+        }
+        .entry-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        .product-tag {
+            padding: 4px 8px;
+            border-radius: 3px;
+            color: white;
+            font-size: 0.8em;
+            font-weight: bold;
+        }
+        .product-tag.testflux {
+            background: #007acc;
+        }
+        .product-tag.stackhealth {
+            background: #28a745;
+        }
+        .entry-date {
+            color: #666;
+            font-size: 0.9em;
+        }
+        .entry-version {
+            font-size: 1.1em;
+            font-weight: bold;
+            color: #333;
+        }
+        .entry-content {
+            line-height: 1.6;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation will be injected here -->
+    <div class="changelog-container">
+        <h1>Product Changelog</h1>
+        <p>Latest updates and releases for TestFlux and StackHealth</p>
+        
+        <div class="filter-controls">
+            <button class="filter-btn active" data-filter="all">All Products</button>
+            <button class="filter-btn" data-filter="testflux">TestFlux</button>
+            <button class="filter-btn" data-filter="stackhealth">StackHealth</button>
+        </div>
+        
+        <div class="changelog-entries">
+            
+        </div>
+    </div>
+    
+    <script>
+        // Filter functionality
+        document.querySelectorAll('.filter-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const filter = btn.dataset.filter;
+                
+                // Update active button
+                document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                
+                // Filter entries
+                document.querySelectorAll('.changelog-entry').forEach(entry => {
+                    if (filter === 'all' || entry.dataset.product === filter) {
+                        entry.style.display = 'block';
+                    } else {
+                        entry.style.display = 'none';
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
