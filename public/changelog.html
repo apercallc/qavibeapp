@@ -4,261 +4,140 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>QAVibe - Product Changelog</title>
-    <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
-    <!-- Scripts -->
-    <script src="./config.js" defer></script>
-    <script src="./components/nav.js" defer></script>
-    <script src="./components/footer.js" defer></script>
-    <script src="./script.js" defer></script>
-    
+    <link rel="stylesheet" href="css/styles.css">
     <style>
-        body {
-            padding-top: 80px; /* Account for fixed navbar */
-        }
-        .changelog-header {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 60px 0;
-            text-align: center;
-        }
-        .changelog-header .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
         .changelog-container {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 40px 20px;
+            padding: 20px;
         }
-        .product-selection {
+        .filter-controls {
+            margin: 20px 0;
             text-align: center;
-            margin: 30px 0;
         }
-        .product-btn {
-            padding: 15px 30px;
-            margin: 0 10px;
+        .filter-btn {
+            padding: 8px 16px;
+            margin: 0 5px;
             border: 2px solid #ddd;
             background: white;
             cursor: pointer;
-            border-radius: 25px;
+            border-radius: 5px;
             transition: all 0.3s ease;
-            font-weight: 500;
-            font-size: 16px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
         }
-        .product-btn:hover {
-            background: #f8f9fa;
-            border-color: #667eea;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 8px rgba(0,0,0,0.15);
-        }
-        .product-btn.active {
-            background: #667eea;
+        .filter-btn.active {
+            background: #007acc;
             color: white;
-            border-color: #667eea;
-        }
-        .product-btn.active:hover {
-            background: #5a67d8;
-        }
-        #changelogContent {
-            margin-top: 30px;
-        }
-        .loading {
-            text-align: center;
-            padding: 60px 20px;
-            color: #666;
-        }
-        .loading i {
-            font-size: 48px;
-            margin-bottom: 20px;
-            animation: spin 1s linear infinite;
-        }
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-        .error-message {
-            text-align: center;
-            padding: 40px;
-            color: #dc3545;
-            background: #f8f9fa;
-            border-radius: 8px;
-            border: 1px solid #dee2e6;
-            margin: 20px 0;
-        }
-        .error-message i {
-            font-size: 48px;
-            margin-bottom: 16px;
-        }
-        .changelog-entries {
-            margin-top: 20px;
+            border-color: #007acc;
         }
         .changelog-entry {
             margin: 20px 0;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            overflow: hidden;
-            transition: all 0.3s ease;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-        }
-        .changelog-entry:hover {
-            box-shadow: 0 4px 8px rgba(0,0,0,0.15);
-        }
-        .changelog-entry.stackhealth {
-            border-left: 4px solid #28a745;
+            border-left: 4px solid #ddd;
+            padding: 15px;
+            background: #f9f9f9;
+            border-radius: 0 5px 5px 0;
         }
         .changelog-entry.testflux {
-            border-left: 4px solid #007acc;
+            border-left-color: #007acc;
+        }
+        .changelog-entry.stackhealth {
+            border-left-color: #28a745;
         }
         .entry-header {
-            background: #f8f9fa;
-            padding: 20px;
-            border-bottom: 1px solid #ddd;
-        }
-        .entry-info {
             display: flex;
+            justify-content: space-between;
             align-items: center;
-            gap: 15px;
             margin-bottom: 10px;
         }
         .product-tag {
-            padding: 4px 12px;
-            border-radius: 12px;
+            padding: 4px 8px;
+            border-radius: 3px;
             color: white;
             font-size: 0.8em;
             font-weight: bold;
         }
-        .product-tag.stackhealth {
-            background: #28a745;
-        }
         .product-tag.testflux {
             background: #007acc;
         }
-        .entry-version {
-            margin: 0;
-            color: #333;
-            font-size: 1.3em;
+        .product-tag.stackhealth {
+            background: #28a745;
         }
         .entry-date {
             color: #666;
             font-size: 0.9em;
-            font-weight: 500;
+        }
+        .entry-version {
+            font-size: 1.1em;
+            font-weight: bold;
+            color: #333;
         }
         .entry-content {
-            padding: 20px;
-        }
-        .content-preview {
-            color: #666;
-            font-style: italic;
-        }
-        .content-full {
-            line-height: 1.3;
-            font-size: 0.95em;
-        }
-        .content-full h3 {
-            color: #333;
-            margin: 12px 0 6px 0;
-            padding-bottom: 2px;
-            border-bottom: 2px solid #eee;
-            font-size: 1.05em;
-            font-weight: 600;
-        }
-        .content-full h4 {
-            color: #555;
-            margin: 8px 0 4px 0;
-            font-size: 0.95em;
-            font-weight: 600;
-        }
-        .content-full ul {
-            margin: 3px 0 8px 0;
-            padding-left: 16px;
-        }
-        .content-full li {
-            margin: 1px 0;
-            line-height: 1.25;
-        }
-        .content-full p {
-            margin: 3px 0;
-            line-height: 1.25;
-        }
-        .content-full strong {
-            font-weight: 600;
-            color: #333;
-        }
-        .content-full code {
-            background: #f1f1f1;
-            padding: 1px 3px;
-            border-radius: 2px;
-            font-family: 'Monaco', 'Menlo', monospace;
-            font-size: 0.85em;
-        }
-        .content-full pre {
-            background: #f8f9fa;
-            padding: 8px;
-            border-radius: 4px;
-            overflow-x: auto;
-            margin: 6px 0;
-            line-height: 1.2;
-            font-size: 0.9em;
-        }
-        .expand-btn {
-            background: #667eea;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 5px;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            margin-top: 15px;
-            transition: all 0.3s ease;
-        }
-        .expand-btn:hover {
-            background: #5a67d8;
-            transform: translateY(-1px);
-        }
-        .expand-btn i {
-            transition: transform 0.3s ease;
-        }
-        .changelog-entry.expanded .expand-btn i {
-            transform: rotate(180deg);
+            line-height: 1.6;
         }
     </style>
 </head>
 <body>
-    <!-- Navigation will be injected by nav.js -->
-
-    <!-- Changelog Header -->
-    <section class="changelog-header">
-        <div class="container">
-            <h1><i class="fas fa-clipboard-list"></i> Product Changelog</h1>
-            <p>Latest updates and releases for TestFlux and StackHealth</p>
-        </div>
-    </section>
-
+    <!-- Navigation will be injected here -->
     <div class="changelog-container">
-        <!-- Product Selection Buttons -->
-        <div class="product-selection">
-            <button class="product-btn active" data-product="testflux" onclick="selectProduct('testflux')">
-                <i class="fas fa-chart-line"></i> TestFlux Changelog
-            </button>
-            <button class="product-btn" data-product="stackhealth" onclick="selectProduct('stackhealth')">
-                <i class="fas fa-shield-alt"></i> StackHealth Changelog
-            </button>
+        <h1>Product Changelog</h1>
+        <p>Latest updates and releases for TestFlux and StackHealth</p>
+        
+        <div class="filter-controls">
+            <button class="filter-btn active" data-filter="all">All Products</button>
+            <button class="filter-btn" data-filter="testflux">TestFlux</button>
+            <button class="filter-btn" data-filter="stackhealth">StackHealth</button>
         </div>
-
-        <!-- Changelog Content -->
-        <div id="changelogContent">
-            <!-- Content will be loaded here -->
+        
+        <div class="changelog-entries">
+            
+                <div class="changelog-entry stackhealth" data-product="stackhealth">
+                    <div class="entry-header">
+                        <div>
+                            <span class="product-tag stackhealth">StackHealth</span>
+                            <span class="entry-version">2.0.0</span>
+                        </div>
+                        <div class="entry-date">August 2, 2025</div>
+                    </div>
+                    <div class="entry-content">
+                        <p>### Added</p><p>- **DORA Metrics Integration**: Comprehensive CI/CD assessment based on DevOps Research and Assessment metrics</p><p>  - Deployment Frequency measurement (1-4 scale)</p><p>  - Lead Time for Changes tracking</p><p>  - Mean Time to Recovery (MTTR) assessment</p><p>  - Change Failure Rate analysis</p><p>- **Enhanced Security Scorecard**: 14-field security assessment based on OWASP SAMM</p><p>  - Static Application Security Testing (SAST) integration</p><p>  - Dynamic Application Security Testing (DAST) capabilities</p><p>  - Software Composition Analysis (SCA) tools</p><p>  - Threat modeling and secure design practices</p><p>- **Advanced CI/CD Pipeline Assessment**: 20+ criteria covering pipeline maturity</p><p>  - Core pipeline components evaluation</p><p>  - Advanced deployment strategies (Blue-Green, Canary)</p><p>  - Infrastructure as Code assessment</p><p>  - Security integration in pipelines</p><p>- **JWT Authentication System**: Secure token-based authentication</p><p>  - User registration and login</p><p>  - Protected API endpoints</p><p>  - Token refresh capabilities</p><p>- **Professional PDF Reports**: Enhanced reporting with detailed breakdowns</p><p>  - DORA metrics visualization</p><p>  - Industry benchmark comparisons</p><p>  - Actionable recommendations</p><p>- **Weighted Scoring System**: Industry-standard scoring with configurable weights</p><p>  - Category-specific scoring algorithms</p><p>  - Performance-based feedback generation</p><p>  - Trend analysis capabilities</p><p>- **Responsive Web Interface**: Modern, mobile-friendly dashboard</p><p>  - Category-specific assessment forms</p><p>  - Real-time scoring feedback</p><p>  - Historical trend visualization</p><p>- **Sample Data Generator**: Realistic test data for development and demos</p><p>  - 90-day historical data generation</p><p>  - Industry-standard score distributions</p><p>  - Multiple product and category coverage</p><p>### Changed</p><p>- **Database Schema**: Updated to support new features</p><p>  - User authentication tables</p><p>  - Enhanced scorecard breakdown storage</p><p>  - Product-based organization</p><p>- **API Architecture**: RESTful API with comprehensive endpoints</p><p>  - Authentication endpoints</p><p>  - CRUD operations for all entities</p><p>  - Trend analysis endpoints</p><p>- **Frontend Architecture**: Complete redesign with modern JavaScript</p><p>  - Component-based organization</p><p>  - Responsive design principles</p><p>  - Enhanced user experience</p><p>### Security</p><p>- **Password Hashing**: Bcrypt-based secure password storage</p><p>- **SQL Injection Protection**: Parameterized queries throughout</p><p>- **XSS Prevention**: Input validation and output encoding</p><p>- **CORS Configuration**: Configurable cross-origin settings</p><p>- **Rate Limiting**: API endpoint protection</p><p>- **Environment-based Configuration**: Secure secret management</p><p>### Performance</p><p>- **Optimized Database Queries**: Efficient data retrieval</p><p>- **Caching Strategy**: Response caching for improved performance</p><p>- **Lazy Loading**: On-demand data loading in frontend</p><p>- **Compressed Assets**: Optimized frontend resources</p>
+                    </div>
+                </div>
+            
+                <div class="changelog-entry stackhealth" data-product="stackhealth">
+                    <div class="entry-header">
+                        <div>
+                            <span class="product-tag stackhealth">StackHealth</span>
+                            <span class="entry-version">1.0.0</span>
+                        </div>
+                        <div class="entry-date">July 15, 2025</div>
+                    </div>
+                    <div class="entry-content">
+                        <p>### Added</p><p>- Initial release of StackHealth Scorecard Platform</p><p>- Basic scorecard functionality</p><p>- Simple scoring system</p><p>- Basic reporting capabilities</p><p>- SQLite database support</p><p>- Simple web interface</p><p>### Features</p><p>- Four assessment categories (Security, Automation, Performance, CI/CD)</p><p>- Yes/No questionnaire format</p><p>- Basic PDF report generation</p><p>- Simple trend tracking</p><p>- File-based configuration</p><p>---</p><p>## Version History</p><p>### [2.0.0] - Major Release</p><p>- Complete platform overhaul</p><p>- DORA metrics integration</p><p>- Enhanced security assessment</p><p>- Professional-grade features</p><p>- Enterprise architecture</p><p>### [1.0.0] - Initial Release</p><p>- Basic scorecard functionality</p><p>- Proof of concept implementation</p><p>- Limited assessment capabilities</p><p>---</p><p>## Migration Guide</p><p>### From 1.0.0 to 2.0.0</p><p>**Database Migration**</p><p>```bash</p><p># Backup existing data</p><p>cp scorecard.db scorecard_v1_backup.db</p><p># Run migration script</p><p>python scripts/migrate_v1_to_v2.py</p><p>```</p><p>**Configuration Updates**</p><p>- Update environment variables (see .env.example)</p><p>- Configure JWT settings</p><p>- Set up CORS policies</p><p>**Frontend Changes**</p><p>- New authentication flow</p><p>- Enhanced assessment forms</p><p>- Updated API endpoints</p><p>**Breaking Changes**</p><p>- Authentication now required for all operations</p><p>- API endpoints restructured</p><p>- Database schema changes</p><p>- Configuration format updated</p><p>For detailed migration instructions, see [Migration Guide](docs/MIGRATION.md).</p><p>---</p><p>## Contributors</p><p>- **Core Team**: StackHealth Development Team</p><p>- **DORA Metrics Research**: Based on Google's State of DevOps research</p><p>- **Security Framework**: Aligned with OWASP SAMM methodology</p><p>- **Community**: Thank you to all contributors and feedback providers</p><p>---</p><p>## Support</p><p>For questions about specific versions or upgrade assistance:</p><p>- **Documentation**: [docs/](docs/)</p><p>- **Issues**: [GitHub Issues](https://github.com/thoangdev/StackHealth/issues)</p><p>- **Discussions**: [GitHub Discussions](https://github.com/thoangdev/StackHealth/discussions)</p><p>- **Email**: support@stackhealth.com</p>
+                    </div>
+                </div>
+            
         </div>
     </div>
-
-    <!-- Footer will be injected by footer.js -->
-
-    <script src="./changelog.js"></script>
+    
+    <script>
+        // Filter functionality
+        document.querySelectorAll('.filter-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const filter = btn.dataset.filter;
+                
+                // Update active button
+                document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                
+                // Filter entries
+                document.querySelectorAll('.changelog-entry').forEach(entry => {
+                    if (filter === 'all' || entry.dataset.product === filter) {
+                        entry.style.display = 'block';
+                    } else {
+                        entry.style.display = 'none';
+                    }
+                });
+            });
+        });
+    </script>
 </body>
 </html>

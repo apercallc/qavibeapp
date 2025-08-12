@@ -1,25 +1,5 @@
 [
   {
-    "product": "TestFlux",
-    "version": "Unreleased",
-    "date": "2025-08-11",
-    "content": [
-      "### Coming Soon",
-      "- **TestFlux Dashboard**: Comprehensive test results visualization platform",
-      "- **Multi-Framework Support**: Integration with Playwright, Cypress, Jest, and more",
-      "- **Real-time Analytics**: Live test execution monitoring and reporting",
-      "- **CI/CD Integration**: Seamless integration with popular CI/CD platforms",
-      "- **Custom Reporting**: Flexible report generation with multiple output formats",
-      "### Planned Features",
-      "- **Test Trend Analysis**: Historical test performance tracking",
-      "- **Flaky Test Detection**: Automated identification of unreliable tests",
-      "- **Team Collaboration**: Shared dashboards and team-based insights",
-      "- **API Integration**: RESTful API for custom integrations",
-      "- **Performance Metrics**: Detailed test execution performance analysis"
-    ],
-    "raw": "## [Unreleased] - Coming Soon"
-  },
-  {
     "product": "StackHealth",
     "version": "2.0.0",
     "date": "2025-08-02",
