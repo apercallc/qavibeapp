@@ -3,25 +3,33 @@ node_modules/
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+package-lock.json
 
 # Environment variables
 .env
 .env.local
 .env.development
 .env.production
+.env.test
 
-# Database files (keep blog.db for development, but not any journals/wal)
+# Database files
 *.db-journal
 *.db-wal
+*.sqlite-journal
 
 # Build outputs
 dist/
 build/
 public/dist/
+public/changelog.html
+public/changelog-data.json
 
 # Logs
 logs/
 *.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
 
 # Runtime data
 pids/
@@ -35,6 +43,8 @@ pids/
 *.swp
 *.swo
 *~
+.project
+.settings/
 
 # OS files
 .DS_Store
@@ -44,24 +54,31 @@ pids/
 .Trashes
 ehthumbs.db
 Thumbs.db
+desktop.ini
 
 # Temporary files
 *.tmp
 *.temp
 .cache/
+.parcel-cache/
 
 # Coverage reports
 coverage/
 .nyc_output/
+*.lcov
+
+# Testing
+.jest/
+__tests__/__snapshots__/
 
 # Backup files
 *.bak
 *.backup
 
-# Lighthouse reports
-lighthouse-report.html
-
 # Development files
-.env.development.local
-.env.test.local
-.env.production.local
+lighthouse-report.html
+.lighthouse/
+
+# Generated files
+sitemap.xml.gz
+robots.txt.backup

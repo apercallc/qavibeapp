@@ -32,51 +32,39 @@ jobs:
     - name: Install dependencies
       run: npm ci
 
-    - name: Create docs directories
+    - name: Create changelog directory
       run: |
-        mkdir -p documentation/docs/testflux
-        mkdir -p documentation/docs/stackhealth
-        mkdir -p documentation/docs/changelogs
+        mkdir -p changelogs
 
-    - name: Sync TestFlux docs
+    - name: Sync TestFlux changelog
       env:
         GITHUB_TOKEN: ${{ secrets.PRIVATE_REPO_TOKEN }}
       run: |
         # Clone private repo to temp directory using token authentication
         git clone https://$GITHUB_TOKEN@github.com/apercallc/testflux.git temp-testflux
         
-        # Copy docs folder
-        if [ -d "temp-testflux/docs" ]; then
-          cp -r temp-testflux/docs/* documentation/docs/testflux/
-        fi
-        
         # Copy changelog
         if [ -f "temp-testflux/CHANGELOG.md" ]; then
-          cp temp-testflux/CHANGELOG.md documentation/docs/changelogs/testflux-changelog.md
+          cp temp-testflux/CHANGELOG.md changelogs/testflux-changelog.md
           # Add product header to changelog
-          echo -e "# TestFlux Changelog\n" | cat - documentation/docs/changelogs/testflux-changelog.md > temp && mv temp documentation/docs/changelogs/testflux-changelog.md
+          echo -e "# TestFlux Changelog\n" | cat - changelogs/testflux-changelog.md > temp && mv temp changelogs/testflux-changelog.md
         fi
         
         # Clean up
         rm -rf temp-testflux
 
-    - name: Sync StackHealth docs
+    - name: Sync StackHealth changelog
       env:
         GITHUB_TOKEN: ${{ secrets.PRIVATE_REPO_TOKEN }}
       run: |
         # Clone private repo to temp directory using token authentication
         git clone https://$GITHUB_TOKEN@github.com/apercallc/stackhealth.git temp-stackhealth
         
-        # Copy docs folder
-        if [ -d "temp-stackhealth/docs" ]; then
-          cp -r temp-stackhealth/docs/* documentation/docs/stackhealth/
-        fi
-        
         # Copy changelog
         if [ -f "temp-stackhealth/CHANGELOG.md" ]; then
-          cp temp-stackhealth/CHANGELOG.md documentation/docs/changelogs/stackhealth-changelog.md
+          cp temp-stackhealth/CHANGELOG.md changelogs/stackhealth-changelog.md
           # Add product header to changelog
-          echo -e "# StackHealth Changelog\n" | cat - documentation/docs/changelogs/stackhealth-changelog.md > temp && mv temp documentation/docs/changelogs/stackhealth-changelog.md
+          echo -e "# StackHealth Changelog\n" | cat - changelogs/stackhealth-changelog.md > temp && mv temp changelogs/stackhealth-changelog.md
         fi
         
         # Clean up

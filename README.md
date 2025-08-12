@@ -5,8 +5,7 @@ QAVibe is the central landing page and blog platform for a suite of free, enterp
 ## ✨ Features
 
 - **🎯 Interactive Dashboard**: Clickable product showcase with tab switching between TestFlux and StackHealth
-- **� Comprehensive Documentation**: Full Docusaurus documentation system with search and navigation
-- **�📱 Fully Responsive**: Optimized for desktop, tablet, and mobile devices  
+- **📱 Fully Responsive**: Optimized for desktop, tablet, and mobile devices  
 - **📝 Integrated Blog System**: Admin-managed blog with full CRUD operations
 - **🤝 Support System**: Professional support forms with Slack integration
 - **🚀 Demo Requests**: Modal-based demo scheduling with CAPTCHA protection
@@ -18,7 +17,8 @@ QAVibe is the central landing page and blog platform for a suite of free, enterp
 - **🔍 SEO Optimized**: Proper meta tags, structured data, and performance
 - **🛡️ Security**: Google reCAPTCHA v2 integration and form validation
 - **⚡ Rate Limiting**: Comprehensive API rate limiting to prevent abuse
-- **📊 Multi-Server Architecture**: Blog, Forms, and Documentation APIs for optimal performance
+- **📊 Multi-Server Architecture**: Blog, Forms, and API servers for optimal performance
+- **📋 Changelog System**: Automated changelog generation from markdown files
 
 ## 🛠️ Tech Stack
 
@@ -30,8 +30,7 @@ QAVibe is the central landing page and blog platform for a suite of free, enterp
 
 ### Backend  
 - **Node.js** - Runtime environment
-- **Express.js** - Multi-server architecture (Blog API + Forms API + Documentation)
-- **Docusaurus 3.8.1** - Documentation system with search and theming
+- **Express.js** - Multi-server architecture (Blog API + Forms API)
 - **SQLite3** - Lightweight database for blog data
 - **Slack Webhooks** - Real-time form notifications
 - **Google reCAPTCHA** - Spam protection and security
@@ -50,10 +49,14 @@ qavibeapp/
 │   ├── public/
 │   │   ├── index.html          # Main landing page
 │   │   ├── blog.html           # Blog interface
+│   │   ├── changelog.html      # Generated changelog page
 │   │   ├── manifest.json       # PWA manifest
 │   │   ├── sw.js               # Service worker
 │   │   ├── robots.txt          # SEO directives
-│   │   └── sitemap.xml         # Site structure
+│   │   ├── sitemap.xml         # Site structure
+│   │   └── components/         # Reusable components
+│   │       ├── nav.js          # Navigation component
+│   │       └── footer.js       # Footer component
 │   │
 │   └── src/
 │       ├── css/
@@ -69,27 +72,36 @@ qavibeapp/
 │   │   ├── blog-server-db.js   # Blog API server (port 3001)
 │   │   └── api-server.js       # Forms API server (port 3002)
 │   │
-│   ├── documentation/          # Docusaurus documentation system
-│   │   ├── docs/              # Documentation content
-│   │   │   ├── testflux/      # TestFlux documentation
-│   │   │   └── stackhealth/   # StackHealth documentation
-│   │   ├── docusaurus.config.js # Documentation configuration
-│   │   ├── sidebars.js        # Navigation structure
-│   │   └── src/css/          # Custom documentation styling
+│   ├── scripts/
+│   │   ├── config.js           # Configuration management
+│   │   ├── build.js            # Build automation
+│   │   └── generate-changelog.js # Automated changelog generation
 │   │
-│   └── scripts/
-│       ├── config.js           # Configuration management
-│       └── build.js            # Build automation
+│   └── changelogs/             # Product changelog files
+│       ├── testflux-changelog.md
+│       └── stackhealth-changelog.md
 │
-├── � Configuration & Deployment
+├── ⚙️ Configuration & Deployment
 │   ├── config/
 │   │   ├── Dockerfile          # Docker containerization
 │   │   ├── railway.json        # Railway platform config
 │   │   └── render.yaml         # Render platform config
 │   │
-│   └── docs/
-│       ├── DEPLOY-GUIDE.md     # Deployment instructions
-│       └── HOSTING-OPTIONS.md  # Platform comparison
+│   └── .github/workflows/
+│       └── sync-docs.yml       # Auto-sync changelogs from private repos
+│
+├── 🗄️ Database & Environment
+│   ├── blog.db                 # SQLite database (auto-created)
+│   ├── .env.example            # Environment variables template
+│   └── package.json            # Dependencies and scripts
+│
+└── 🚀 Quick Start
+    ├── start.sh                # Development startup script
+    ├── README.md               # This documentation
+    ├── CHANGELOG.MD            # Repository changelog
+    ├── TODO.MD                 # Development roadmap
+    └── LICENSE                 # Project license
+```
 │
 ├── �️ Database & Environment
 │   ├── blog.db                 # SQLite database (auto-created)
@@ -143,20 +155,19 @@ qavibeapp/
    # Start the API server for forms (port 3002)
    node server/api-server.js
    
-   # Start the documentation server (port 3003)
-   cd documentation && npm start
-   
    # In another terminal, start the frontend server (port 8002)
    npm run start:frontend
+   
+   # Generate changelog from markdown files
+   npm run changelog
    ```
 
 5. **Access the application**
    - Main website: http://localhost:8002
    - Blog: http://localhost:8002/blog.html
    - Support: http://localhost:8002/support.html
-   - Documentation: http://localhost:3003/docs/
-   - Documentation Portal: http://localhost:8002/docs-portal.html
-   - Admin login: Password is `admin123` (configurable in .env)
+   - Changelog: http://localhost:8002/changelog.html
+   - Admin login: Password is `your-secure-password-here` (configurable in .env)
 
 ### Production Deployment
 
@@ -193,25 +204,30 @@ Enterprise software quality assessment and reporting tool:
 - ✅ **Dashboard Analytics**: Real-time quality metrics
 - ✅ **Product Management**: Multi-project oversight
 
-## 📚 Documentation System
+## � Changelog System
 
 ### Features
-- **🔍 Search Functionality**: Built-in search across all documentation with Algolia support
-- **📱 Mobile Responsive**: Optimized documentation experience on all devices
-- **🎨 QAVibe Branding**: Custom styling that matches main site design
-- **📖 Left Navigation**: Categorized sidebar navigation for easy browsing
-- **🚀 Fast Loading**: Optimized for quick access and smooth navigation
-- **🔗 Deep Linking**: Direct links to specific documentation sections
+- **� Automated Generation**: Generate combined changelog from individual product files
+- **� Date Sorting**: Chronologically sorted entries (newest first)
+- **�️ Product Tagging**: Color-coded entries for TestFlux and StackHealth
+- **� Interactive Filtering**: Filter by product or show all entries
+- **� Responsive Design**: Mobile-optimized changelog interface
+- **🤖 GitHub Actions**: Auto-sync from private repositories
 
-### Product Documentation
-- **TestFlux**: Setup guides, architecture, deployment, enterprise tools, monitoring
-- **StackHealth**: User guides, development, V2 features, troubleshooting, community
+### Changelog Management
+- **Source Files**: Individual markdown files in `changelogs/` directory
+- **Generated Output**: Combined HTML page at `/changelog.html`
+- **JSON Export**: Data available at `/changelog-data.json`
+- **Auto-sync**: GitHub Actions pull latest changes from private repos
 
-### Access Points
-- Documentation Portal: http://localhost:3003/docs/
-- From Main Site: Click "Documentation" in navigation
-- Quick Access: Use dropdown menu for direct product links
-- Portal Overview: Visit `/docs-portal.html` for card-based interface
+### Usage
+```bash
+# Generate changelog manually
+npm run changelog
+
+# View changelog
+# Visit http://localhost:8002/changelog.html
+```
 
 ## 📝 Blog System
 

@@ -12,6 +12,7 @@
     "preview": "npm run build && cd dist && python3 -m http.server 8002",
     "deploy:netlify": "netlify deploy --prod --dir=public",
     "deploy:vercel": "vercel --prod public",
+    "changelog": "node scripts/generate-changelog.js",
     "lighthouse": "lighthouse http://localhost:8002 --output html --output-path ./lighthouse-report.html",
     "validate": "html-validate public/index.html",
     "optimize": "npm run build:prod && npm run lighthouse",
@@ -48,15 +49,13 @@
     "url": "https://github.com/apercallc/qavibeapp/issues"
   },
   "devDependencies": {
+    "concurrently": "^8.2.2",
     "html-validate": "^8.0.0",
     "http-server": "^14.1.1",
-    "lighthouse": "^11.0.0",
+    "lighthouse": "^12.8.1",
     "nodemon": "^3.0.1"
   },
   "dependencies": {
-    "@docusaurus/core": "^3.8.1",
-    "@docusaurus/preset-classic": "^3.8.1",
-    "@docusaurus/theme-search-algolia": "^3.8.1",
     "axios": "^1.11.0",
     "body-parser": "^1.20.3",
     "cors": "^2.8.5",
@@ -76,8 +75,6 @@
     "not dead",
     "not ie 11"
   ],
-  "directories": {
-    "doc": "docs"
-  },
+  "directories": {},
   "type": "commonjs"
 }
