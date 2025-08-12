@@ -78,7 +78,6 @@ class NavigationComponent {
                         </div>
                     </div>
                     <a href="./index.html#support" class="nav-link">Support</a>
-                    <a href="./docs-portal.html" class="nav-link">Documentation</a>
                     <div class="nav-dropdown">
                         <a href="#" class="nav-link dropdown-trigger">
                             Quick Access

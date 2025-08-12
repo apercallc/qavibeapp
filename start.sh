@@ -43,9 +43,8 @@ API_PID=$!
 
 # Start the documentation server in the background
 echo "📚 Starting documentation server (port 3003)..."
-cd documentation && npm start &
+(cd documentation && npm start) &
 DOCS_PID=$!
-cd ..
 
 # Wait a moment for backend to start
 sleep 2
