@@ -3,7 +3,7 @@ const path = require('path');
 
 async function generateCombinedChangelog() {
     try {
-        const changelogDir = './docs/changelogs';
+        const changelogDir = './documentation/docs/changelogs';
         const outputPath = './public/changelog.html';
         
         // Read individual changelogs

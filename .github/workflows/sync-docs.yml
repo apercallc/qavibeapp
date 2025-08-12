@@ -34,8 +34,8 @@ jobs:
 
     - name: Create docs directories
       run: |
-        mkdir -p documentation/docs/products/testflux
-        mkdir -p documentation/docs/products/stackhealth
+        mkdir -p documentation/docs/testflux
+        mkdir -p documentation/docs/stackhealth
         mkdir -p documentation/docs/changelogs
 
     - name: Sync TestFlux docs
@@ -47,14 +47,14 @@ jobs:
         
         # Copy docs folder
         if [ -d "temp-testflux/docs" ]; then
-          cp -r temp-testflux/docs/* documentation/docs/products/testflux/
+          cp -r temp-testflux/docs/* documentation/docs/testflux/
         fi
         
         # Copy changelog
         if [ -f "temp-testflux/CHANGELOG.md" ]; then
           cp temp-testflux/CHANGELOG.md documentation/docs/changelogs/testflux-changelog.md
           # Add product header to changelog
-          sed -i '1i# TestFlux Changelog\n' documentation/docs/changelogs/testflux-changelog.md
+          echo -e "# TestFlux Changelog\n" | cat - documentation/docs/changelogs/testflux-changelog.md > temp && mv temp documentation/docs/changelogs/testflux-changelog.md
         fi
         
         # Clean up
@@ -69,24 +69,29 @@ jobs:
         
         # Copy docs folder
         if [ -d "temp-stackhealth/docs" ]; then
-          cp -r temp-stackhealth/docs/* documentation/docs/products/stackhealth/
+          cp -r temp-stackhealth/docs/* documentation/docs/stackhealth/
         fi
         
         # Copy changelog
         if [ -f "temp-stackhealth/CHANGELOG.md" ]; then
           cp temp-stackhealth/CHANGELOG.md documentation/docs/changelogs/stackhealth-changelog.md
           # Add product header to changelog
-          sed -i '1i# StackHealth Changelog\n' documentation/docs/changelogs/stackhealth-changelog.md
+          echo -e "# StackHealth Changelog\n" | cat - documentation/docs/changelogs/stackhealth-changelog.md > temp && mv temp documentation/docs/changelogs/stackhealth-changelog.md
         fi
         
         # Clean up
         rm -rf temp-stackhealth
 
+    - name: Generate combined changelog
+      run: |
+        node scripts/generate-changelog.js
+
     - name: Commit and push changes
       run: |
         git config --local user.email "action@github.com"
         git config --local user.name "GitHub Action"
-        if git diff --staged --quiet; then
+        git add .
+        if git diff --cached --quiet; then
           echo "No changes to commit"
         else
           git commit -m "Auto-sync docs from private repos [$(date)]"
