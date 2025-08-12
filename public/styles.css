@@ -50,6 +50,7 @@ body {
     justify-content: center;
     align-items: center;
     position: relative;
+    text-align: center;
 }
 
 .announcement-text {
@@ -352,6 +353,13 @@ body.has-announcement .navbar {
     grid-template-columns: 1fr 1fr;
     gap: 4rem;
     align-items: center;
+}
+
+.hero-center {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    text-align: center;
 }
 
 .hero-content h1 {

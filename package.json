@@ -1,7 +1,7 @@
 {
   "name": "qavibeapp",
-  "version": "1.0.0",
-  "description": "QAVibe - Free Enterprise Testing Tools - Central landing page for TestFlux and StackHealth platforms",
+  "version": "2.5.0",
+  "description": "QAVibe - Free Enterprise Testing Tools - Central platform showcasing TestFlux dashboard and StackHealth scorecard with integrated blog and support system",
   "main": "public/index.html",
   "scripts": {
     "build": "node scripts/build.js",
@@ -9,9 +9,7 @@
     "serve": "cd public && python3 -m http.server 8002",
     "serve-node": "npx http-server public -p 8002 -o",
     "build:prod": "NODE_ENV=production node scripts/build.js",
-    "preview": "npm run build && cd dist && python3 -m http.server 8002",
-    "deploy:netlify": "netlify deploy --prod --dir=public",
-    "deploy:vercel": "vercel --prod public",
+    "preview": "npm run build && npm run serve",
     "changelog": "node scripts/generate-changelog.js",
     "lighthouse": "lighthouse http://localhost:8002 --output html --output-path ./lighthouse-report.html",
     "validate": "html-validate public/index.html",
@@ -24,7 +22,8 @@
     "start:all": "concurrently \"npm run api:start\" \"npm run blog:start\" \"npm run serve\"",
     "start:frontend": "npm run serve",
     "start:backend": "npm run blog:start",
-    "start:api": "npm run api:start"
+    "start:api": "npm run api:start",
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
     "testing",

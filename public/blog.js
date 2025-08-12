@@ -272,6 +272,7 @@ class BlogManager {
     }
     
     renderPost(post) {
+        console.log('Rendering post:', post.title, 'with ID:', post.id);
         const formatDate = (dateString) => {
             return new Date(dateString).toLocaleDateString('en-US', {
                 year: 'numeric',
@@ -304,7 +305,7 @@ class BlogManager {
         ` : '';
         
         return `
-            <article class="post-card" onclick="blogManager.openPost(${post.id})">
+            <article class="post-card" onclick="event.preventDefault(); openPost(${post.id})">
                 <div class="post-image">
                     ${imageHTML}
                 </div>
@@ -324,7 +325,7 @@ class BlogManager {
                     ${post.tags.length > 0 ? `<div class="post-tags">${tagsHTML}</div>` : ''}
                     ${post.labels.length > 0 ? `<div class="post-labels">${labelsHTML}</div>` : ''}
                     <div class="post-actions">
-                        <a href="#" class="read-more" onclick="event.stopPropagation(); blogManager.openPost(${post.id})">
+                        <a href="javascript:void(0)" class="read-more" onclick="event.preventDefault(); openPost(${post.id})">
                             Read More <i class="fas fa-arrow-right"></i>
                         </a>
                         ${adminActions}
@@ -336,20 +337,27 @@ class BlogManager {
     
     // Post Interaction
     openPost(postId) {
+        console.log('BlogManager.openPost called with postId:', postId);
+        console.log('Available posts:', this.posts);
         const post = this.posts.find(p => p.id === postId);
+        console.log('Found post:', post);
         if (post) {
             this.showPostModal(post);
+        } else {
+            console.error('Post not found with ID:', postId);
+            alert('Post not found. Please try refreshing the page.');
         }
     }
     
     showPostModal(post) {
+        console.log('showPostModal called with post:', post);
         const modal = document.createElement('div');
         modal.className = 'modal';
         modal.innerHTML = `
             <div class="modal-content post-modal">
-                <div class="modal-header">
-                    <h2>${post.title}</h2>
-                    <button class="modal-close" onclick="this.closest('.modal').remove()">
+                <div class="modal-header" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; padding-bottom: 1rem; border-bottom: 1px solid #e5e7eb;">
+                    <h2 style="margin: 0; font-size: 1.5rem;">${post.title}</h2>
+                    <button class="modal-close" onclick="this.closest('.modal').remove()" style="background: none; border: none; font-size: 1.5rem; cursor: pointer; color: #6b7280;">
                         <i class="fas fa-times"></i>
                     </button>
                 </div>
@@ -368,13 +376,13 @@ class BlogManager {
                             ${post.author}
                         </div>
                     </div>
-                    ${post.image ? `<div class="post-modal-image">
-                        <img src="${post.image}" alt="${post.title}">
+                    ${post.image ? `<div class="post-modal-image" style="margin-bottom: 1rem;">
+                        <img src="${post.image}" alt="${post.title}" style="width: 100%; border-radius: 0.5rem;">
                     </div>` : ''}
                     <div class="post-modal-content">
-                        ${post.content.split('\\n').map(line => 
+                        ${post.content.split('\n').map(line => 
                             line.startsWith('#') ? 
-                                `<h${line.indexOf(' ')}>${line.replace(/^#+\s/, '')}</h${line.indexOf(' ')}>` :
+                                `<h${Math.min(6, (line.match(/^#+/) || [''])[0].length)}>${line.replace(/^#+\s/, '')}</h${Math.min(6, (line.match(/^#+/) || [''])[0].length)}>` :
                                 line.trim() ? `<p>${line}</p>` : '<br>'
                         ).join('')}
                     </div>
@@ -409,6 +417,9 @@ class BlogManager {
         `;
         
         document.body.appendChild(modal);
+        
+        // Ensure modal is displayed
+        modal.style.display = 'block';
         
         // Close modal when clicking outside
         modal.addEventListener('click', (e) => {
@@ -608,10 +619,39 @@ function filterPosts() {
     blogManager.renderPosts();
 }
 
+// Global function to open posts (for HTML onclick handlers)
+function openPost(postId) {
+    console.log('openPost called with postId:', postId);
+    
+    if (window.blogManager) {
+        console.log('Using window.blogManager');
+        window.blogManager.openPost(postId);
+    } else if (blogManager) {
+        console.log('Using local blogManager');
+        blogManager.openPost(postId);
+    } else {
+        console.error('BlogManager not initialized');
+        alert('BlogManager not initialized - please refresh the page');
+    }
+}
+
+// Test function
+function testBlogManager() {
+    console.log('Testing blog manager...');
+    console.log('window.blogManager:', window.blogManager);
+    console.log('local blogManager:', blogManager);
+    return window.blogManager || blogManager;
+}
+
 // Initialize blog when page loads
 let blogManager;
+window.blogManager = null; // Make it globally accessible
+
 document.addEventListener('DOMContentLoaded', function() {
+    console.log('Initializing BlogManager...');
     blogManager = new BlogManager();
+    window.blogManager = blogManager; // Make it globally accessible
+    console.log('BlogManager initialized:', blogManager);
     
     // Close modals when clicking outside
     window.addEventListener('click', function(event) {
@@ -622,10 +662,8 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     });
-});
-
-// Mobile navigation (reuse from main site)
-document.addEventListener('DOMContentLoaded', function() {
+    
+    // Mobile navigation (reuse from main site)
     const hamburger = document.getElementById('hamburger');
     const navMenu = document.getElementById('nav-menu');
     

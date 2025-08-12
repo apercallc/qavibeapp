@@ -77,38 +77,22 @@ class NavigationComponent {
                             </div>
                         </div>
                     </div>
-                    <a href="./index.html#support" class="nav-link">Support</a>
+                    <a href="#" class="nav-link" onclick="navigationComponent.handleSupportLink(); return false;">Support</a>
                     <div class="nav-dropdown">
                         <a href="#" class="nav-link dropdown-trigger">
                             Quick Access
                             <i class="fas fa-chevron-down dropdown-icon"></i>
                         </a>
                         <div class="dropdown-content">
-                            <div class="dropdown-item" tabindex="0" onclick="window.open('http://localhost:3003/docs/testflux/intro', '_blank')">
+                            <div class="dropdown-item" tabindex="0" onclick="window.location.href='./blog.html'">
                                 <div class="dropdown-item-icon">
-                                    <i class="fas fa-file-alt"></i>
+                                    <i class="fas fa-blog"></i>
                                 </div>
                                 <div class="dropdown-item-content">
-                                    <h4>TestFlux Docs</h4>
-                                    <p>Complete TestFlux documentation</p>
-                                </div>
-                                <div class="dropdown-item-action">
-                                    <i class="fas fa-external-link-alt"></i>
+                                    <h4>Blog</h4>
+                                    <p>Latest insights and updates</p>
                                 </div>
                             </div>
-                            <div class="dropdown-item" tabindex="0" onclick="window.open('http://localhost:3003/docs/stackhealth/intro', '_blank')">
-                                <div class="dropdown-item-icon">
-                                    <i class="fas fa-file-alt"></i>
-                                </div>
-                                <div class="dropdown-item-content">
-                                    <h4>StackHealth Docs</h4>
-                                    <p>Complete StackHealth documentation</p>
-                                </div>
-                                <div class="dropdown-item-action">
-                                    <i class="fas fa-external-link-alt"></i>
-                                </div>
-                            </div>
-                            <div class="dropdown-divider"></div>
                             <div class="dropdown-item" tabindex="0" onclick="window.location.href='./changelog.html'">
                                 <div class="dropdown-item-icon">
                                     <i class="fas fa-list"></i>
@@ -118,10 +102,18 @@ class NavigationComponent {
                                     <p>Latest updates and changes</p>
                                 </div>
                             </div>
+                            <div class="dropdown-divider"></div>
+                            <div class="dropdown-item" tabindex="0" onclick="window.location.href='./security.html'">
+                                <div class="dropdown-item-icon">
+                                    <i class="fas fa-shield-alt"></i>
+                                </div>
+                                <div class="dropdown-item-content">
+                                    <h4>Security</h4>
+                                    <p>Security practices and policies</p>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    <a href="./blog.html" class="nav-link">Blog</a>
-                    <button class="demo-btn" onclick="openDemoModal()">Get a Demo</button>
                 </div>
                 <div class="hamburger" id="hamburger">
                     <span></span>
@@ -155,14 +147,7 @@ class NavigationComponent {
             });
         });
 
-        // Handle support link specifically
-        const supportLink = document.querySelector('.nav-link[href*="#support"]');
-        if (supportLink) {
-            supportLink.addEventListener('click', (e) => {
-                e.preventDefault();
-                this.handleSupportLink();
-            });
-        }
+        // Handle support link specifically - removed since we now use direct support.html
 
         // Set active nav link based on current page
         this.setActiveNavLink();
@@ -188,17 +173,20 @@ class NavigationComponent {
         });
     }
 
-    // Handle support link to scroll to support section on index page
+    // Handle support link to scroll to support section on current page or redirect to index
     handleSupportLink() {
-        if (window.location.pathname.endsWith('index.html') || window.location.pathname === '/') {
-            // We're on index page, scroll to support section
-            const supportSection = document.getElementById('support');
-            if (supportSection) {
-                supportSection.scrollIntoView({ 
-                    behavior: 'smooth',
-                    block: 'start'
-                });
-            }
+        // First check if there's a support section on the current page
+        const supportSection = document.getElementById('support');
+        
+        if (supportSection) {
+            // We have a support section on current page, scroll to it
+            supportSection.scrollIntoView({ 
+                behavior: 'smooth',
+                block: 'start'
+            });
+        } else if (window.location.pathname.endsWith('index.html') || window.location.pathname === '/') {
+            // We're on index page but no support section found
+            console.warn('Support section not found on index page');
         } else {
             // We're on another page, redirect to index with support hash
             window.location.href = './index.html#support';
@@ -220,7 +208,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Only initialize if navigation doesn't already exist
     if (!document.querySelector('.navbar')) {
         try {
-            new NavigationComponent();
+            window.navigationComponent = new NavigationComponent();
             console.log('Navigation component initialized successfully');
         } catch (error) {
             console.error('Error initializing navigation:', error);

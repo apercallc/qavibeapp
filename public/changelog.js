@@ -3,16 +3,51 @@ class ChangelogManager {
     constructor() {
         this.currentProduct = 'testflux';
         this.cache = new Map();
+        this.allEntries = [];
         this.init();
     }
 
-    init() {
-        // Load TestFlux changelog by default
-        this.loadChangelog('testflux');
+    async init() {
+        // Load changelog data first
+        await this.loadChangelogData();
+        // Set up event listeners
+        this.setupEventListeners();
+        // Then load TestFlux changelog by default
+        this.displayChangelog('testflux');
     }
 
-    async loadChangelog(product) {
+    setupEventListeners() {
+        // Use event delegation for expand buttons
+        document.addEventListener('click', (e) => {
+            if (e.target.closest('.expand-btn')) {
+                e.preventDefault();
+                const button = e.target.closest('.expand-btn');
+                this.toggleEntry(button);
+            }
+        });
+    }
+
+    async loadChangelogData() {
+        try {
+            const response = await fetch('./changelog-data.json');
+            if (!response.ok) {
+                throw new Error(`Failed to load changelog data: ${response.statusText}`);
+            }
+            this.allEntries = await response.json();
+            console.log('Loaded changelog data:', this.allEntries);
+        } catch (error) {
+            console.error('Error loading changelog data:', error);
+            this.allEntries = [];
+        }
+    }
+
+    displayChangelog(product) {
         const contentDiv = document.getElementById('changelogContent');
+        
+        if (!contentDiv) {
+            console.error('changelogContent div not found');
+            return;
+        }
         
         // Show loading state
         contentDiv.innerHTML = `
@@ -22,44 +57,118 @@ class ChangelogManager {
             </div>
         `;
 
-        try {
-            // Check cache first
-            if (this.cache.has(product)) {
-                contentDiv.innerHTML = this.cache.get(product);
-                return;
-            }
+        // Filter entries for the selected product
+        const productName = product === 'testflux' ? 'TestFlux' : 'StackHealth';
+        const productEntries = this.allEntries.filter(entry => 
+            entry.product && entry.product.toLowerCase() === productName.toLowerCase()
+        );
 
-            // Determine API URL based on environment
-            const isDevelopment = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
-            const apiBaseUrl = isDevelopment ? 'http://localhost:3001' : '';
-            
-            // Fetch markdown content from server
-            const response = await fetch(`${apiBaseUrl}/api/changelog/${product}`);
-            
-            if (!response.ok) {
-                throw new Error(`Failed to load changelog: ${response.statusText}`);
-            }
+        console.log(`Found ${productEntries.length} entries for ${productName}`);
 
-            const htmlContent = await response.text();
-            
-            // Cache the content
-            this.cache.set(product, htmlContent);
-            
-            // Display the content
-            contentDiv.innerHTML = htmlContent;
-            
-        } catch (error) {
-            console.error('Error loading changelog:', error);
+        if (productEntries.length === 0) {
             contentDiv.innerHTML = `
                 <div class="error-message">
-                    <i class="fas fa-exclamation-triangle"></i>
-                    <h3>Failed to Load Changelog</h3>
-                    <p>Sorry, we couldn't load the changelog at this time. Please try again later.</p>
-                    <button class="btn btn-primary" onclick="changelogManager.loadChangelog('${product}')">
-                        <i class="fas fa-retry"></i> Retry
-                    </button>
+                    <i class="fas fa-info-circle"></i>
+                    <h3>No Changelog Available</h3>
+                    <p>No changelog entries found for ${productName}.</p>
+                    <p><small>Available products: ${this.allEntries.map(e => e.product).join(', ')}</small></p>
                 </div>
             `;
+            return;
+        }
+
+        // Generate HTML for entries
+        const entriesHTML = productEntries.map(entry => this.renderChangelogEntry(entry)).join('');
+        
+        contentDiv.innerHTML = `
+            <div class="changelog-entries">
+                ${entriesHTML}
+            </div>
+        `;
+        
+        console.log('Changelog entries rendered successfully');
+    }
+
+    renderChangelogEntry(entry) {
+        const productClass = entry.product.toLowerCase().replace(/\s+/g, '');
+        const date = entry.date ? new Date(entry.date).toLocaleDateString('en-US', { 
+            year: 'numeric', 
+            month: 'long', 
+            day: 'numeric' 
+        }) : '';
+        
+        // Convert content array to HTML
+        const content = Array.isArray(entry.content) ? entry.content.join('\n') : entry.content;
+        const formattedContent = this.formatContent(content);
+
+        return `
+            <div class="changelog-entry ${productClass}" data-product="${entry.product}">
+                <div class="entry-header">
+                    <div class="entry-info">
+                        <span class="product-tag ${productClass}">${entry.product}</span>
+                        <h3 class="entry-version">${entry.version}</h3>
+                    </div>
+                    <div class="entry-date">${date}</div>
+                </div>
+                <div class="entry-content">
+                    <div class="content-preview">
+                        <p>Click to expand and view full changelog...</p>
+                    </div>
+                    <div class="content-full" style="display: none;">
+                        ${formattedContent}
+                    </div>
+                    <button class="expand-btn">
+                        <i class="fas fa-chevron-down"></i>
+                        <span>Expand</span>
+                    </button>
+                </div>
+            </div>
+        `;
+    }
+
+    formatContent(content) {
+        if (!content) return '';
+        
+        return content
+            .replace(/### (.*?)(\n|$)/g, '<h4>$1</h4>')
+            .replace(/## (.*?)(\n|$)/g, '<h3>$1</h3>')
+            .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+            .replace(/\*(.*?)\*/g, '<em>$1</em>')
+            .replace(/`([^`]+)`/g, '<code>$1</code>')
+            .replace(/```([^```]+)```/g, '<pre><code>$1</code></pre>')
+            .replace(/^- (.*?)$/gm, '<li>$1</li>')
+            .replace(/(<li>.*<\/li>)/gs, '<ul>$1</ul>')
+            .replace(/<\/ul>\s*<ul>/g, '')
+            .replace(/\n\n/g, '</p><p>')
+            .replace(/\n/g, '<br>')
+            .replace(/^(.*)/, '<p>$1')
+            .replace(/(.*?)$/, '$1</p>')
+            .replace(/<p><\/p>/g, '')
+            .replace(/<p><h/g, '<h')
+            .replace(/<\/h([1-6])><\/p>/g, '</h$1>');
+    }
+
+    toggleEntry(button) {
+        const entry = button.closest('.changelog-entry');
+        const preview = entry.querySelector('.content-preview');
+        const full = entry.querySelector('.content-full');
+        const icon = button.querySelector('i');
+        const text = button.querySelector('span');
+
+        if (full.style.display === 'none') {
+            // Expand
+            preview.style.display = 'none';
+            full.style.display = 'block';
+            icon.className = 'fas fa-chevron-up';
+            text.textContent = 'Collapse';
+            entry.classList.add('expanded');
+        } else {
+            // Collapse
+            preview.style.display = 'block';
+            full.style.display = 'none';
+            icon.className = 'fas fa-chevron-down';
+            text.textContent = 'Expand';
+            entry.classList.remove('expanded');
         }
     }
 
@@ -69,13 +178,16 @@ class ChangelogManager {
             btn.classList.remove('active');
         });
         
-        document.querySelector(`[data-product="${product}"]`).classList.add('active');
+        const activeBtn = document.querySelector(`[data-product="${product}"]`);
+        if (activeBtn) {
+            activeBtn.classList.add('active');
+        }
         
         // Update current product
         this.currentProduct = product;
         
         // Load changelog
-        this.loadChangelog(product);
+        this.displayChangelog(product);
     }
 
     // Clear cache if needed
@@ -90,12 +202,21 @@ let changelogManager;
 // Wait for DOM to be ready
 document.addEventListener('DOMContentLoaded', () => {
     changelogManager = new ChangelogManager();
+    // Make it globally accessible
+    window.changelogManager = changelogManager;
 });
 
 // Global function for button clicks
 function selectProduct(product) {
     if (changelogManager) {
         changelogManager.selectProduct(product);
+    }
+}
+
+// Global function for expand/collapse (backup)
+function toggleEntry(button) {
+    if (changelogManager) {
+        changelogManager.toggleEntry(button);
     }
 }
 

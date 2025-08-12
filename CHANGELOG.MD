@@ -5,9 +5,64 @@ All notable changes to QAVibe application will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.5.0] - 2025-08-11
+
+### 🧹 Deep Repository Cleanup
+- **Removed Duplicate Directories**: Eliminated outdated `src/` and `dist/` directories
+- **Consolidated Active Files**: All active development files now in `public/` directory
+- **Removed Obsolete Scripts**: Deleted `fix-pages.sh` and duplicate `sw.js` from root
+- **Streamlined Structure**: Simplified project organization for better maintainability
+- **Updated Documentation**: README, TODO, and CHANGELOG fully updated with current state
+
+### 🐛 Critical Bug Fixes
+- **Fixed Blog "Read More"**: Resolved modal popup functionality completely
+  - Fixed `href="#"` causing page jumps to top
+  - Added proper event handling with `preventDefault()`
+  - Made `blogManager` globally accessible for onclick handlers
+  - Added debugging and error handling for better reliability
+- **Improved Modal Layout**: Made blog post modals more compact and readable
+  - Reduced padding and margins throughout modal content
+  - Optimized header layout and typography
+  - Enhanced content spacing and line heights
+  - Better mobile responsiveness
+
+### 🎨 UI/UX Improvements
+- **Banner Centering Fix**: Resolved left-alignment issues across all pages
+  - Created new `.hero-center` CSS class for single-column pages
+  - Fixed grid layout problems on legal pages (privacy, terms, etc.)
+  - Maintained `.hero-container` for homepage two-column layout
+  - All banners now properly centered and consistent
+- **Changelog Compactness**: Enhanced changelog page text density
+  - Reduced margins and line spacing for better readability
+  - Improved content organization and visual hierarchy
+  - Maintained readability while maximizing content per screen
+
+### 🔧 Technical Improvements
+- **Server Management**: Clarified HTTP 304 responses (not errors, but proper caching)
+- **Event Handling**: Enhanced JavaScript event delegation and global function access
+- **Modal System**: Improved modal display, positioning, and interaction handling
+- **Development Workflow**: Streamlined startup process and debugging capabilities
+
+### 📚 Documentation Overhaul
+- **README Update**: Completely refreshed with accurate current information
+  - Updated project structure to reflect actual organization
+  - Clarified getting started instructions
+  - Added realistic product status (in development)
+  - Enhanced feature descriptions and technical details
+- **TODO Refresh**: Updated with current priorities and completed items
+  - Added comprehensive future roadmap
+  - Organized by immediate, future, and long-term goals
+  - Included technical debt and known issues sections
+- **CHANGELOG Enhancement**: Improved formatting and detail level
+
+### 🗑️ Removed Deprecated Items
+- **Outdated Files**: Removed `src/css/`, `src/js/`, `dist/`, `fix-pages.sh`
+- **Duplicate Assets**: Eliminated duplicate service worker and configuration files
+- **Obsolete Scripts**: Cleaned up unused build artifacts and temporary files
+
 ## [2.4.0] - 2025-08-11
 
-### 🧹 Repository Cleanup & Restructuring
+### 🧹 Repository Cleanup & Restructuring (Previous Version)
 - **Removed Docusaurus**: Eliminated complex documentation system to simplify architecture
 - **Streamlined Dependencies**: Removed all Docusaurus-related packages from package.json
 - **Relocated Changelogs**: Moved from `documentation/docs/changelogs/` to `./changelogs/`
@@ -15,7 +70,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Enhanced .gitignore**: Added comprehensive file exclusion patterns
 - **Cleaned Environment**: Simplified .env.example with current, relevant variables
 
-### 📋 Enhanced Changelog System
+### 📋 Enhanced Changelog System (Previous Version)
 - **Automated Generation**: `npm run changelog` command for manual changelog building
 - **GitHub Actions Integration**: Auto-sync changelogs from private TestFlux and StackHealth repos
 - **Interactive Filtering**: Product-specific filtering with color-coded entries

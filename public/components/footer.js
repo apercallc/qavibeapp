@@ -43,10 +43,10 @@ class FooterComponent {
                     <div class="footer-section">
                         <h4>Resources</h4>
                         <ul>
-                            <li><a href="./blog.html">Blog</a></li>
+                            <li><a href="./acceptable-use.html">Acceptable Use</a></li>
                             <li><a href="./changelog.html">Changelog</a></li>
-                            <li><a href="./index.html#support">Support</a></li>
-                            <li><a href="#" onclick="openDemoModal(); return false;">Get Demo</a></li>
+                            <li><a href="./support.html">Support</a></li>
+                            <li><a href="./security.html">Security</a></li>
                         </ul>
                     </div>
                     <div class="footer-section">

@@ -1,24 +1,23 @@
 # 🚀 QAVibe - Free Enterprise Testing Tools
 
-QAVibe is the central landing page and blog platform for a suite of free, enterprise-grade testing tools designed to transform software quality processes at zero cost.
+QAVibe is a central platform showcasing free, enterprise-grade testing tools including TestFlux dashboard and StackHealth scorecard platform. Built for the software testing community with a mission to make quality tools accessible to everyone.
 
 ## ✨ Features
 
-- **🎯 Interactive Dashboard**: Clickable product showcase with tab switching between TestFlux and StackHealth
+- **🎯 Product Showcase**: Interactive tabs displaying TestFlux and StackHealth capabilities
 - **📱 Fully Responsive**: Optimized for desktop, tablet, and mobile devices  
-- **📝 Integrated Blog System**: Admin-managed blog with full CRUD operations
-- **🤝 Support System**: Professional support forms with Slack integration
-- **🚀 Demo Requests**: Modal-based demo scheduling with CAPTCHA protection
-- **🔐 Admin Panel**: Secure blog management with password protection
-- **💾 SQLite Database**: Persistent data storage for blog posts
-- **🔔 Announcement System**: Configurable top banner for important messages
-- **⚡ PWA Ready**: Progressive Web App capabilities with service worker
-- **🎨 Professional UI/UX**: Clean design with smooth animations and transitions
-- **🔍 SEO Optimized**: Proper meta tags, structured data, and performance
-- **🛡️ Security**: Google reCAPTCHA v2 integration and form validation
-- **⚡ Rate Limiting**: Comprehensive API rate limiting to prevent abuse
-- **📊 Multi-Server Architecture**: Blog, Forms, and API servers for optimal performance
+- **📝 Blog System**: Complete blog with admin management and SQLite database
+- **🤝 Support Integration**: Professional support forms with Slack notifications
+- **🚀 Demo Requests**: Modal-based demo scheduling with reCAPTCHA protection
+- **🔐 Admin Panel**: Secure blog management with password authentication
 - **📋 Changelog System**: Automated changelog generation from markdown files
+- **💾 SQLite Database**: Persistent storage for blog posts and admin data
+- **🔔 Announcement Banner**: Configurable promotional messages
+- **⚡ PWA Ready**: Progressive Web App with service worker
+- **🎨 Modern UI/UX**: Clean design with smooth animations
+- **🔍 SEO Optimized**: Meta tags, structured data, performance optimized
+- **🛡️ Security Features**: Rate limiting, CORS, input validation
+- **⚡ Multi-Server Architecture**: Scalable backend with specialized servers
 
 ## 🛠️ Tech Stack
 
@@ -45,73 +44,63 @@ QAVibe is the central landing page and blog platform for a suite of free, enterp
 
 ```
 qavibeapp/
-├── 📄 Frontend (Public)
-│   ├── public/
-│   │   ├── index.html          # Main landing page
-│   │   ├── blog.html           # Blog interface
-│   │   ├── changelog.html      # Generated changelog page
-│   │   ├── manifest.json       # PWA manifest
-│   │   ├── sw.js               # Service worker
-│   │   ├── robots.txt          # SEO directives
-│   │   ├── sitemap.xml         # Site structure
-│   │   └── components/         # Reusable components
-│   │       ├── nav.js          # Navigation component
-│   │       └── footer.js       # Footer component
-│   │
-│   └── src/
-│       ├── css/
-│       │   ├── styles.css      # Main website styles
-│       │   └── blog-styles.css # Blog-specific styles
-│       │
-│       └── js/
-│           ├── script.js       # Main website functionality
-│           └── blog.js         # Blog functionality
+├── 📄 Frontend
+│   └── public/                 # Main application files
+│       ├── index.html          # Landing page
+│       ├── blog.html           # Blog interface
+│       ├── changelog.html      # Generated changelog
+│       ├── support.html        # Support form
+│       ├── about.html          # About page
+│       ├── *.html              # Legal pages (privacy, terms, etc.)
+│       ├── styles.css          # Main styles
+│       ├── blog-styles.css     # Blog-specific styles
+│       ├── script.js           # Main functionality
+│       ├── blog.js             # Blog functionality
+│       ├── changelog.js        # Changelog functionality
+│       ├── config.js           # Configuration
+│       ├── manifest.json       # PWA manifest
+│       ├── sw.js               # Service worker
+│       ├── robots.txt          # SEO directives
+│       ├── sitemap.xml         # Site structure
+│       └── components/         # Reusable components
+│           ├── nav.js          # Navigation
+│           └── footer.js       # Footer
 │
-├── 🔧 Backend & Scripts
-│   ├── server/
-│   │   ├── blog-server-db.js   # Blog API server (port 3001)
-│   │   └── api-server.js       # Forms API server (port 3002)
-│   │
+├── 🔧 Backend
+│   └── server/
+│       ├── blog-server-db.js   # Blog API (port 3001)
+│       └── api-server.js       # Forms API (port 3002)
+│
+├── 📋 Scripts & Automation
 │   ├── scripts/
-│   │   ├── config.js           # Configuration management
+│   │   ├── generate-changelog.js  # Changelog generator
 │   │   ├── build.js            # Build automation
-│   │   └── generate-changelog.js # Automated changelog generation
-│   │
-│   └── changelogs/             # Product changelog files
-│       ├── testflux-changelog.md
-│       └── stackhealth-changelog.md
-│
-├── ⚙️ Configuration & Deployment
-│   ├── config/
-│   │   ├── Dockerfile          # Docker containerization
-│   │   ├── railway.json        # Railway platform config
-│   │   └── render.yaml         # Render platform config
+│   │   └── config.js           # Build configuration
 │   │
 │   └── .github/workflows/
-│       └── sync-docs.yml       # Auto-sync changelogs from private repos
+│       └── sync-docs.yml       # Auto-sync changelogs
 │
-├── 🗄️ Database & Environment
+├── 📊 Data & Configuration
+│   ├── changelogs/             # Product changelog sources
+│   │   ├── testflux-changelog.md
+│   │   └── stackhealth-changelog.md
+│   │
+│   ├── config/                 # Deployment configs
+│   │   ├── Dockerfile
+│   │   ├── railway.json
+│   │   └── render.yaml
+│   │
 │   ├── blog.db                 # SQLite database (auto-created)
-│   ├── .env.example            # Environment variables template
-│   └── package.json            # Dependencies and scripts
+│   ├── .env                    # Environment variables
+│   └── .env.example            # Template
 │
-└── 🚀 Quick Start
-    ├── start.sh                # Development startup script
-    ├── README.md               # This documentation
-    ├── CHANGELOG.MD            # Repository changelog
+└── 🚀 Project Files
+    ├── package.json            # Dependencies & scripts
+    ├── start.sh                # Development startup
+    ├── README.md               # Documentation
+    ├── CHANGELOG.MD            # Version history
     ├── TODO.MD                 # Development roadmap
-    └── LICENSE                 # Project license
-```
-│
-├── �️ Database & Environment
-│   ├── blog.db                 # SQLite database (auto-created)
-│   ├── .env.example            # Environment variables template
-│   └── package.json            # Dependencies and scripts
-│
-└── 🚀 Quick Start
-    ├── start.sh                # Development startup script
-    ├── README.md               # This documentation
-    └── LICENSE                 # Project license
+    └── LICENSE                 # MIT License
 ```
 
 ## 🚦 Getting Started
@@ -119,8 +108,9 @@ qavibeapp/
 ### Prerequisites
 - Node.js (v16 or higher)
 - npm (comes with Node.js)
+- Python 3 (for development server)
 
-### Local Development
+### Quick Start
 
 1. **Clone the repository**
    ```bash
@@ -139,35 +129,45 @@ qavibeapp/
    # Edit .env with your configuration
    ```
 
-4. **Start the development servers**
-
-   **Option A: Quick Start (Recommended)**
+4. **Start all servers (Recommended)**
    ```bash
-   # Single command to start all servers
    ./start.sh
    ```
 
-   **Option B: Manual Start**
-   ```bash
-   # Start the blog backend server (port 3001)
-   npm run start:backend
-   
-   # Start the API server for forms (port 3002)
-   node server/api-server.js
-   
-   # In another terminal, start the frontend server (port 8002)
-   npm run start:frontend
-   
-   # Generate changelog from markdown files
-   npm run changelog
-   ```
-
 5. **Access the application**
-   - Main website: http://localhost:8002
-   - Blog: http://localhost:8002/blog.html
-   - Support: http://localhost:8002/support.html
-   - Changelog: http://localhost:8002/changelog.html
-   - Admin login: Password is `your-secure-password-here` (configurable in .env)
+   - **Main website**: http://localhost:8002
+   - **Blog**: http://localhost:8002/blog.html
+   - **Support**: http://localhost:8002/support.html
+   - **Changelog**: http://localhost:8002/changelog.html
+
+### Manual Server Management
+
+If you prefer to start servers individually:
+
+```bash
+# Backend servers
+npm run blog:start     # Blog API (port 3001)
+npm run api:start      # Forms API (port 3002)
+
+# Frontend server  
+npm run serve          # Frontend (port 8002)
+
+# Generate changelog
+npm run changelog      # Creates changelog.html
+```
+
+### Development Commands
+
+```bash
+# Development with auto-restart
+npm run blog:dev       # Blog server with nodemon
+npm run api:dev        # API server with nodemon
+
+# Build and optimization
+npm run build          # Build optimized version
+npm run lighthouse     # Performance audit
+npm run validate       # HTML validation
+```
 
 ### Production Deployment
 
@@ -183,49 +183,55 @@ See `docs/DEPLOY-GUIDE.md` for detailed deployment instructions and `docs/RATE-L
 ## 🛠️ Tools Showcased
 
 ### TestFlux - Test Results Dashboard
+🚧 **Status**: In Development - Coming Soon!
+
 Enterprise-grade platform for aggregating and visualizing automated test results:
 
-**Key Features:**
-- ✅ **Multi-Framework Support**: Playwright, ZAP, k6 integration
-- ✅ **CI/CD Integration**: Seamless pipeline integration
-- ✅ **Role-based Access**: Enterprise security controls
-- ✅ **Real-time Analytics**: Live test result monitoring
-- ✅ **ML-powered Insights**: Intelligent trend analysis
-- ✅ **Alert System**: Automated failure notifications
+**Planned Features:**
+- **Multi-Framework Support**: Playwright, Cypress, Jest integration
+- **Real-time Analytics**: Live test execution monitoring
+- **CI/CD Integration**: Seamless pipeline integration
+- **Custom Reporting**: Flexible report generation
+- **Trend Analysis**: Historical performance tracking
+- **Team Collaboration**: Shared dashboards and insights
 
 ### StackHealth - Scorecard Platform  
+🚧 **Status**: In Development - Coming Soon!
+
 Enterprise software quality assessment and reporting tool:
 
-**Key Features:**
-- ✅ **Security Assessment**: OWASP compliance scoring
-- ✅ **Automation Analytics**: CI/CD maturity evaluation  
-- ✅ **Performance Metrics**: Load testing result analysis
-- ✅ **PDF Reporting**: Executive-ready scorecards
-- ✅ **Dashboard Analytics**: Real-time quality metrics
-- ✅ **Product Management**: Multi-project oversight
+**Planned Features:**
+- **Security Assessment**: OWASP compliance scoring
+- **Performance Metrics**: Detailed execution analysis
+- **API Integration**: RESTful API for custom integrations
+- **PDF Reporting**: Executive-ready scorecards
+- **Dashboard Analytics**: Real-time quality metrics
+- **Multi-Project Management**: Comprehensive oversight
 
-## � Changelog System
+## 📋 Changelog System
+
+The automated changelog system combines individual product changelogs into a unified interface:
 
 ### Features
-- **� Automated Generation**: Generate combined changelog from individual product files
-- **� Date Sorting**: Chronologically sorted entries (newest first)
-- **�️ Product Tagging**: Color-coded entries for TestFlux and StackHealth
-- **� Interactive Filtering**: Filter by product or show all entries
-- **� Responsive Design**: Mobile-optimized changelog interface
-- **🤖 GitHub Actions**: Auto-sync from private repositories
+- **🤖 Automated Generation**: `npm run changelog` command
+- **📅 Date Sorting**: Chronologically sorted entries (newest first)
+- **🏷️ Product Tagging**: Color-coded TestFlux and StackHealth entries
+- **🔍 Interactive Filtering**: Filter by product or view all
+- **📱 Responsive Design**: Mobile-optimized interface
+- **⚡ GitHub Actions**: Auto-sync from private repositories
 
-### Changelog Management
-- **Source Files**: Individual markdown files in `changelogs/` directory
-- **Generated Output**: Combined HTML page at `/changelog.html`
-- **JSON Export**: Data available at `/changelog-data.json`
-- **Auto-sync**: GitHub Actions pull latest changes from private repos
+### How It Works
+1. **Source Files**: Individual markdown files in `changelogs/` directory
+2. **JSON Generation**: Combined data exported to `changelog-data.json`
+3. **HTML Output**: Beautiful changelog page at `/changelog.html`
+4. **Auto-sync**: GitHub Actions pull latest changes from private repos
 
 ### Usage
 ```bash
 # Generate changelog manually
 npm run changelog
 
-# View changelog
+# View generated changelog
 # Visit http://localhost:8002/changelog.html
 ```
 

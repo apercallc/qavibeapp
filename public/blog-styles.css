@@ -435,9 +435,11 @@
 
 /* Post Modal Styles */
 .post-modal {
-    max-width: 800px;
-    max-height: 90vh;
+    max-width: 900px;
+    max-height: 85vh;
     overflow-y: auto;
+    margin: 5% auto;
+    padding: 1.5rem;
 }
 
 .post-modal-body {
@@ -445,54 +447,69 @@
 }
 
 .post-modal .post-meta {
-    padding: 1.5rem 1.5rem 1rem;
+    padding: 0 0 1rem 0;
     border-bottom: 1px solid #e5e7eb;
-    margin-bottom: 0;
+    margin-bottom: 1rem;
+    display: flex;
+    gap: 2rem;
+    flex-wrap: wrap;
+}
+
+.post-modal .post-meta .post-date,
+.post-modal .post-meta .post-author {
+    font-size: 0.9rem;
+    color: #6b7280;
 }
 
 .post-modal-content {
-    padding: 0 1.5rem;
-    line-height: 1.8;
-    font-size: 1.1rem;
+    padding: 0;
+    line-height: 1.6;
+    font-size: 1rem;
 }
 
 .post-modal-content h1,
 .post-modal-content h2,
 .post-modal-content h3,
 .post-modal-content h4 {
-    margin: 2rem 0 1rem;
+    margin: 1.5rem 0 0.8rem 0;
     color: #1f2937;
+    line-height: 1.3;
 }
 
 .post-modal-content h1 {
-    font-size: 2rem;
+    font-size: 1.8rem;
     border-bottom: 2px solid #e5e7eb;
-    padding-bottom: 0.5rem;
+    padding-bottom: 0.4rem;
+    margin: 0 0 1rem 0;
 }
 
 .post-modal-content h2 {
-    font-size: 1.5rem;
+    font-size: 1.4rem;
 }
 
 .post-modal-content h3 {
-    font-size: 1.25rem;
+    font-size: 1.2rem;
 }
 
 .post-modal-content p {
-    margin-bottom: 1rem;
+    margin-bottom: 0.8rem;
     color: #374151;
+}
+
+.post-modal-content br {
+    line-height: 0.4;
 }
 
 .post-modal-tags,
 .post-modal-labels {
-    padding: 0 1.5rem;
-    margin-bottom: 1rem;
+    padding: 0;
+    margin: 1.5rem 0 0.5rem 0;
 }
 
 .post-modal-tags h4,
 .post-modal-labels h4 {
     margin-bottom: 0.5rem;
-    font-size: 0.9rem;
+    font-size: 0.85rem;
     font-weight: 600;
     color: #6b7280;
     text-transform: uppercase;
@@ -502,9 +519,9 @@
     display: flex;
     justify-content: flex-end;
     gap: 1rem;
-    padding: 1.5rem;
+    padding: 1rem 0 0 0;
+    margin-top: 1.5rem;
     border-top: 1px solid #e5e7eb;
-    background: #f9fafb;
 }
 
 .btn-danger {
